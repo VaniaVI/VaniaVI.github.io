@@ -1,0 +1,23 @@
+body{
+    background-image: url('https://i.pinimg.com/1200x/08/ef/fc/08effcada999d99296809c4a3189d92d.jpg'); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: "Merriweather Sans",sans-serif;
+}
+
+#encabezado{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column;   
+}
+
+#encabezado h5{
+    color: white;
+}
+
+#navbarSupportedContent .nav-link{
+    color:white;
+    /* width: 150px; */
+}
