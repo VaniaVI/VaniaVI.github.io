@@ -84,7 +84,7 @@ body{
 
   .btn-buy {
     display: inline-block;
-    background-color: #007bff; /* azul */
+    background-color: #007bff; 
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
@@ -140,6 +140,11 @@ body{
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
-  padding: 50px 20px; 
  
+}
+
+
+/* footer */
+footer{
+background-color: black;
 }
