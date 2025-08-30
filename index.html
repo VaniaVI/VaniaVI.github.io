@@ -145,142 +145,66 @@
         
         <article id="payments" class="form-section">
             <div class="form-container">
-                <!-- Método pago -->
-                <form>
-                    <!-- Nombre -->
-                    <div class="row g-3">
-                        <div class="col">
-                            <label for="inputFirstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-                        </div>
-                        <div class="col">
-                            <label for="inputLastName" class="form-label">Last name</label>
-                            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
-                        </div>
-                    </div>
-                    
-                    <div class="col-12 mt-3">
-                        <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
-                        <div class="input-group">
-                            <div class="input-group-text">@</div>
-                            <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
-                        </div>
-                    </div>
-                    
-                    <!-- email -->
-                    <div class="col-12 mt-3">
-                        <label for="inputEmail4" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4">
-                    </div>
-                    <div class="col-12 mt-3">
-                        <label for="inputAddress" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                    </div>
-                    <div class="col-12 mt-3">
-                        <label for="inputAddress2" class="form-label">Address 2</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                    </div>
-                    
-                    <div class="row g-3 mt-1">
-                        <div class="col-md-6">
-                            <label for="inputCity" class="form-label">City</label>
-                            <input type="text" class="form-control" id="inputCity">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="inputState" class="form-label">State</label>
-                            <select id="inputState" class="form-select">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="inputZip" class="form-label">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
-                        </div>
-                    </div>
-                    
-                    <div class="col-12 mt-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">
-                                Check me out
-                            </label>
-                        </div>
-                    </div>
-                    <!-- Payment -->
-                    <div  class="col-12 mt-4">
-                        <h4>Payment</h4>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                            <label class="form-check-label" for="gridRadios1">
-                                Credit Card
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                            <label class="form-check-label" for="gridRadios2">
-                                Debit Card
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-                            <label class="form-check-label" for="gridRadios3">
-                                Paypal
-                            </label>
-                        </div>
 
-                        <!-- No me funciona <hr style="height:19px;border-width:0;color:gray;background-color:gray"> -->
-                        <!-- Card -->
-                        <div class="row g-3 mt-1">
-                            <div class="col">
-                                <label for="inputNameCard" class="form-label">Name on card</label>
-                                <input type="text" class="form-control" placeholder="Name on card" aria-label="Name on card">
-                            </div>
-                            <div class="col">
-                                <label for="inputCreditCardNumber" class="form-label">Credit card number</label>
-                                <input type="text" class="form-control" placeholder="CreditCardNumber" aria-label="CreditCardNumber">
-                            </div>
-                        </div>
-                        <div class="row g-3 mt-1">
-                            <div class="col-3">
-                                <label for="inputExpiration" class="form-label">Expiration</label>
-                                <input type="text" class="form-control" placeholder="MM/YY" aria-label="Expiration">
-                            </div>
-                            <div class="col-3">
-                                <label for="inputCVV" class="form-label">CVV</label>
-                                <input type="text" class="form-control" placeholder="CVV" aria-label="CVV">
-                            </div>
-                        </div>
-                        
-                        <!-- submit btn -->
-                        <div class="col-12 mt-4 text-center">
-                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                                Continue to checkout
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Payment Successful!</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Thank you for your purchase! Your payment was processed successfully
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
+                <form class="row g-3 needs-validation" novalidate action="http://localhost:8088/api/v1/usuarios"  method="get">
+                  <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label">First name</label>
+                    <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+                    <div class="valid-feedback">
+                      Looks good!
                     </div>
-                </div>
-            </article>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="validationCustom02" class="form-label">Last name</label>
+                    <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="validationCustomUsername" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend">@</span>
+                      <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                      <div class="invalid-feedback">
+                        Please choose a username.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="validationCustom03" class="form-label">City</label>
+                    <input type="text" class="form-control" id="validationCustom03" required>
+                    <div class="invalid-feedback">
+                      Please provide a valid city.
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-3">
+                    <label for="validationCustom05" class="form-label">Zip</label>
+                    <input type="text" class="form-control" id="validationCustom05" required>
+                    <div class="invalid-feedback">
+                      Please provide a valid zip.
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                      <label class="form-check-label" for="invalidCheck">
+                        Agree to terms and conditions
+                      </label>
+                      <div class="invalid-feedback">
+                        You must agree before submitting.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                  </div>
+                </form>
+
+            </div>
+        </article>
+
             
             <section id="aboutus" class="about-container">
                 <!-- Contenedor izquierdo -->
@@ -321,6 +245,6 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <!-- conexion js -->
-        <script src="script.js"></script>
+        <script src="script.js" defer></script>
     </body>
     </html>

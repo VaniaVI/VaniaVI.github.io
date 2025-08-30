@@ -1,3 +1,5 @@
+
+
 body{
     /* background-image: url('https://i.pinimg.com/1200x/08/ef/fc/08effcada999d99296809c4a3189d92d.jpg'); 
     background-repeat: no-repeat;
@@ -34,6 +36,7 @@ body{
     padding: 20px; /* para que no quede pegado */
 }
 
+/* FORM */
 
 
 .form-section {
@@ -54,6 +57,10 @@ body{
     width: 100%;
     box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
   }
+
+  
+
+/* CARD */
 
   .card-container {
     max-width: 900px; /* contenedor más pequeño */
