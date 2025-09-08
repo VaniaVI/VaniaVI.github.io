@@ -18,20 +18,21 @@
       type="image/x-icon"
     />
     <!-- Google Icons -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+    <!-- Íconos clásicos -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <!-- Íconos variables -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=expand_circle_right" rel="stylesheet" />
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top custom-navbar">
+      <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top custom-navbar" style="font-family: 'Fredoka', sans-serif; font-weight: 400;">
         <div class="container flex-column">
           <!-- columna para que tengamos dos filas -->
 
           <!-- PRIMERA FILA: menú + carrito -->
           <div class="d-flex w-100 justify-content-between align-items-center">
-            <a class="navbar-brand" href="#">PetSocity</a>
+            <a class="navbar-brand" href="#" style="font-family: 'Fredoka', sans-serif; font-weight: 600;">PetSocity</a>
             <button
               class="navbar-toggler"
               type="button"
@@ -44,7 +45,7 @@
               <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" >
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                   <a class="nav-link active" href="#">Home</a>
@@ -124,15 +125,19 @@
 
 
     <section
-      class="banner d-flex flex-wrap align-items-center justify-content-between px-5">
-      <article class="flex-fill">
-        <h1 class="display-3">Tienda Online</h1>
-        <p class="lead">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa,
-          deserunt?
+      class="banner d-flex flex-wrap align-items-center justify-content-between px-5" >
+      <article class="flex-fill ">
+        <h1 style="font-family: 'Fredoka', sans-serif; font-weight: 600;font-size: 4.2rem;">Hechos para resistir</br> y emocionar.</h1>
+        <p class="lead" style="font-family: 'Fredoka', sans-serif; font-weight: 400; font-size: 1.5rem; color: orange;">
+            Haz feliz a tu compañero peludo.
         </p>
-        <div class="ver-productos">
-            <button type="button">Ver más productos</button>
+        <div class="ver-productos d-flex justify-content-center">
+            <button type="button" style="font-family: 'Fredoka', sans-serif; font-weight: 500;" >
+              Compre ahora!
+              <span class="material-symbols-outlined" >
+                expand_circle_right
+              </span>
+            </button>
         </div>
       </article>
       <figure class="d-flex justify-content-center align-items-end">
