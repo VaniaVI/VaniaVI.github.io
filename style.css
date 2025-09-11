@@ -61,7 +61,7 @@
   margin-right: 10px;
 }
 
-/* Tarjetas */
+/* Tarjetas de productos*/
 .custom-card {
   border-radius: 1rem;
   overflow: hidden;
@@ -70,6 +70,13 @@
 }
 .custom-card:hover {
   transform: translateY(-5px);
+}
+.custom-card img{
+  height: 300px;     
+  width: 100%;         
+  object-fit: cover;   
+  border-top-left-radius: 0.5rem; 
+  border-top-right-radius: 0.5rem; 
 }
 .price {
   font-weight: 600;
@@ -124,7 +131,7 @@
     flex-direction: column-reverse;
     min-height: 70vh;
     max-height: none;
-    padding-top: 80px; /* Account for fixed navbar */
+    padding-top: 10px; 
   }
 
   .banner article {
@@ -149,10 +156,23 @@
     padding: 0.6rem 1.2rem;
     font-size: 1.1rem;
   }
+
+  /* Tarjetas de productos*/
+  .custom-card {
+  max-width: 80%;
+  margin: 0 auto;
+  }
+
+
 }
 
 /* Extra small screens */
 @media (max-width: 576px) {
+
+  .banner {
+  margin-top: 10px;
+}
+
   .banner article {
     padding: 1.5rem 0.5rem;
   }
