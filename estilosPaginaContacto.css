@@ -1,0 +1,11 @@
+/* Banner del mockup */
+.contacto-hero{
+  width: 260px;
+  height: 140px;
+  background: #e9ecef;
+  border: 1px solid #dee2e6;
+  border-radius: .5rem;
+}
+
+/* Ajustes visuales pequeños */
+.card-header { letter-spacing: .04em; }
