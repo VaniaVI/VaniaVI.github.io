@@ -14,40 +14,80 @@
 
   <!-- ===== HEADER ===== -->
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f9c971;">
-      <div class="container">
-        <!-- Botón -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- NAVBAR igual a main (dos filas), con logo nuevo centrado -->
+    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top custom-navbar" style="font-family: 'Fredoka', sans-serif; font-weight: 400;">
+      <div class="container flex-column">
+        <!-- fila 1 -->
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <a class="navbar-brand" href="./index.html" style="font-family: 'Fredoka', sans-serif; font-weight: 600;">
+            PetSocity
+          </a>
 
-        <!-- Contenido del navbar -->
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <!-- Inicio -->
-          <div class="d-flex">
-            <a class="nav-item nav-link" href="./index.html" style="color: white;">Inicio</a>
-          </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-          <!-- Logo centrado -->
-          <div class="mx-auto">
-            <img src="./images/Imagen1.jpg" style="width: 40vh;" alt="logo">
-          </div>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
 
-          <!-- Botones -->
-          <div class="d-flex" style="gap:15px;">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              Iniciar sesión
-            </button>
-            <a class="btn btn-primary"
-               style="background-color:#f7f7f7; border-color: #f7f7f7; color: black;"
-               href="./resgisterUser.html" role="button">Registrarse</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="./productos.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="./productos.html#alimento">Alimento</a></li>
+                  <li><a class="dropdown-item" href="./productos.html#accesorios">Accesorios</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="./productos.html#ofertas">Ofertas</a></li>
+                </ul>
+              </li>
+
+              <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
+              <li class="nav-item"><a class="nav-link" href="./blogs.html">Blogs</a></li>
+              <li class="nav-item"><a class="nav-link active" href="./paginaContacto.html">Contacto</a></li>
+
+              <!-- cesta en móvil -->
+              <li class="nav-item d-xl-none">
+                <div class="d-flex align-items-center">
+                  <div class="position-relative d-inline-block me-3">
+                    <span class="material-icons">shopping_cart</span>
+                  </div>
+                  <a class="nav-link" href="./carritoCompra.html">Cesta</a>
+                </div>
+              </li>
+
+              <!-- login/registro en móvil -->
+              <li class="nav-item d-xl-none">
+                <div class="d-flex flex-column gap-2 mt-2">
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Iniciar sesión</button>
+                  <a class="btn btn-light border" href="./registroUsuario.html" role="button">Registrarse</a>
+                </div>
+              </li>
+            </ul>
+
+            <!-- cesta en desktop -->
+            <div class="d-none d-xl-flex align-items-center pe-5">
+              <div class="position-relative d-inline-block me-3">
+                <span class="material-icons">shopping_cart</span>
+              </div>
+              <li class="nav-item list-unstyled"><a class="nav-link" href="./carritoCompra.html">Cesta</a></li>
+            </div>
           </div>
+        </div>
+
+        <!-- fila 2: login/registro desktop -->
+        <div class="d-none d-xl-flex w-100 justify-content-center mt-2">
+          <!-- logo centrado -->
+          <img src="./LogoPetSocity.png" alt="PetSocity" class="site-logo" width="220" height="120">
+        </div>
+        <div id="loginRegistro" class="d-none d-xl-flex w-100 justify-content-end gap-3 mt-2">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Iniciar sesión</button>
+          <a class="btn btn-light border" href="./registroUsuario.html" role="button">Registrarse</a>
         </div>
       </div>
     </nav>
   </header>
+
 
   <main class="container pb-5 mt-4 contacto">
     <!-- Hero simple -->
