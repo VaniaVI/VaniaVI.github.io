@@ -1,5 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
 
+body{
+  background-image: url('https://i.pinimg.com/736x/a6/13/8b/a6138b7c5c88329582abb3567a5df1c1.jpg');
+  position: relative;
+
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.782); /* Cambia el color y transparencia */
+  z-index: -1; /* Se queda detrás del contenido */
+}
+
 .custom-navbar {
   min-height: 12vh;
 }
@@ -9,8 +23,7 @@
   background-color: #e1f5fe;
   background-repeat: no-repeat;
   background-size: auto;
-  min-height: 80vh;
-  max-height: 80vh;
+  max-height: 65vh;
   display: flex;
 }
 
@@ -19,8 +32,8 @@
   flex: 1 1 50%;
   display: flex;
   align-items: flex-end;
-  min-height: 65vh;
-  margin-top: 6.8rem;
+  min-height:40vh;
+  margin-top: 20px;
 }
 
 .img-banner {
