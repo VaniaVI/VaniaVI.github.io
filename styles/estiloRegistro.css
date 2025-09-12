@@ -1,104 +1,104 @@
+/* Fondo general tipo Apple */
+body {
+  background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  min-height: 100vh;
+}
+
 /* Título destacado */
 .titulo-enmarcado {
-    background-color: #f8f9fa;
-    border-left: 4px solid #0d6efd;
-    padding: 1rem 1.25rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1.5rem;
+  background-color: #f8f9fa;
+  border-left: 4px solid #0d6efd;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 /* Contenedor centrado */
 .registro-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
 }
 
-/* Tarjeta tipo ventana */
+/* Tarjeta tipo ventana elegante */
 .registro-card {
-    background-color: #ffffff;
-    padding: 2rem 2.5rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
+  background-color: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-width: 720px;
+  width: 100%;
+  transition: box-shadow 0.3s ease;
+}
+
+.registro-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
 }
 
 /* Inputs generales */
-.form-control {
-    margin-bottom: 0;
+.form-control,
+.form-select {
+  border-radius: 0.75rem;
+  border: 1px solid #ced4da;
+  padding: 0.75rem;
+  transition: border-color 0.2s ease;
 }
 
-.form-control:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+.form-control:focus,
+.form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
 }
 
 /* Etiquetas */
 .form-label {
-    margin-bottom: 0.25rem;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
 }
 
 .form-check-label {
-    font-size: 0.95rem;
-    color: #495057;
+  font-size: 0.95rem;
+  color: #495057;
 }
 
 /* Botón registrar */
 .btn-final {
-    width: auto;
-    min-width: 140px;
-    padding: 0.4rem 1rem;
-    font-size: 1rem;
-    font-weight: 500;
-    border-radius: 0.4rem;
+  min-width: 140px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.6rem;
+  background-color: #007aff;
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn-final:hover {
+  background-color: #005ecb;
 }
 
 /* Mensajes de error */
 .invalid-feedback {
-    margin-top: 2px;
-    font-size: 0.875rem;
-    color: #dc3545;
-}
-
-/* Sección de mascotas */
-#mascotasContainer {
-    margin-top: 0;
-}
-
-#mascotasContainer .border {
-    background-color: #f8f9fa;
-    padding: 1rem;
-    border-radius: 0.5rem;
-}
-
-#mascotasContainer .form-label {
-    font-weight: 500;
-}
-
-.mascota-bloque {
-    border-top: 2px solid #dee2e6;
-    transition: all 0.3s ease-in-out;
-}
-
-.btn-mascota {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    line-height: 1.2;
+  margin-top: 2px;
+  font-size: 0.875rem;
+  color: #dc3545;
 }
 
 /* Responsive para móviles */
 @media (max-width: 576px) {
-    .registro-card {
-        padding: 1.5rem;
-    }
+  .registro-card {
+    padding: 1.5rem;
+  }
 
-    h2 {
-        font-size: 1.25rem;
-    }
+  h2 {
+    font-size: 1.25rem;
+  }
 
-    .btn-final {
-        font-size: 0.9rem;
-        padding: 0.35rem 0.75rem;
-    }
+  .btn-final {
+    font-size: 0.9rem;
+    padding: 0.4rem 1rem;
+  }
 }
