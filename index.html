@@ -17,7 +17,7 @@
 <body>
     <header>
         <!-- Restored original two-row navbar structure with proper collapse functionality -->
-        <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top custom-navbar" style="font-family: 'Fredoka', sans-serif; font-weight: 400;">
+        <nav class="navbar navbar-expand-xl navbar-light bg-light custom-navbar" style="font-family: 'Fredoka', sans-serif; font-weight: 400;">
             <div class="container flex-column">
                 <!-- PRIMERA FILA: menú + carrito -->
                 <div class="d-flex w-100 justify-content-between align-items-center">
@@ -68,7 +68,7 @@
                             <li class="nav-item d-xl-none">
                                 <div class="d-flex align-items-center">
                                     <div class="position-relative d-inline-block me-3">
-                                        <span class="material-icons">shopping_cart</span>
+                                        <span class="material-symbols-outlined">add_shopping_cart</span>
                                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
                                     </div>
                                     <a class="nav-link" href="#">Cesta</a>
@@ -80,49 +80,40 @@
                                 <div class="d-flex flex-column gap-2 mt-2">
                                     <button
                                         type="button"
-                                        class="btn btn-primary"
+                                        class="btn"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal"
-                                    >
-                                        Iniciar sesión
+                                        data-bs-target="#exampleModal">
+                                        <span class="material-symbols-outlined">account_circle</span>
                                     </button>
-                                    <a
-                                        class="btn btn-light border"
-                                        href="/registroUsuario.html"
-                                        role="button"
-                                    >Registrarse</a>
                                 </div>
                             </li>
                         </ul>
 
                         <!-- Cesta - Desktop -->
                         <div class="d-none d-xl-flex align-items-center pe-5">
-                            <div class="position-relative d-inline-block me-3">
-                                <span class="material-icons">shopping_cart</span>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        <!-- Cesta + Login - Desktop -->
+                        <div class="d-none d-xl-flex align-items-center gap-3 pe-5">
+                        <!-- Botón de inicio de sesión -->
+                            <button
+                            type="button"
+                            class="btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            <span class="material-symbols-outlined">account_circle</span>
+                            </button>
+                      
+                        <!-- Ícono del carrito -->
+                            <div class="position-relative d-inline-block">
+                            <span class="material-symbols-outlined">add_shopping_cart</span>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
                             </div>
-                            <li class="nav-item list-unstyled">
-                                <a class="nav-link" href="#">Cesta</a>
-                            </li>
+                      
+                        <!-- Enlace a la cesta -->
+                        <li class="nav-item list-unstyled">
+                            <a class="nav-link" href="#">Cesta</a>
+                        </li>
                         </div>
                     </div>
-                </div>
-
-                <!-- SEGUNDA FILA: login / registro - Desktop only -->
-                <div id="loginRegistro" class="d-none d-xl-flex w-100 justify-content-end gap-3 mt-2">
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
-                    >
-                        Iniciar sesión
-                    </button>
-                    <a
-                        class="btn btn-light border"
-                        href="/registroUsuario.html"
-                        role="button"
-                    >Registrarse</a>
                 </div>
             </div>
         </nav>
@@ -152,7 +143,7 @@
 
         <section>
             <div class="container py-5">
-              <h2 class="text-center mb-5">Nuestros Productos</h2>
+              <h2 class="text-center mb-5">Productos Tendencias</h2>
               <div class="row g-4 justify-content-center" id="productContainer">
                 <!-- Aquí se insertan las cards dinámicamente -->
               </div>

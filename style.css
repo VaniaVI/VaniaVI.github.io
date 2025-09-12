@@ -11,7 +11,6 @@
   background-size: auto;
   min-height: 80vh;
   max-height: 80vh;
-  margin-top: 40px;
   display: flex;
 }
 body {
@@ -134,7 +133,6 @@ body {
     flex-direction: column-reverse;
     min-height: 70vh;
     max-height: none;
-    padding-top: 10px; 
   }
 
   .banner article {
@@ -171,10 +169,6 @@ body {
 
 /* Extra small screens */
 @media (max-width: 576px) {
-
-  .banner {
-  margin-top: 10px;
-}
 
   .banner article {
     padding: 1.5rem 0.5rem;
