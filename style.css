@@ -14,6 +14,9 @@
   margin-top: 40px;
   display: flex;
 }
+body {
+  padding-top: 100px; /* Ajusta según el alto real del navbar */
+}
 
 /* Imagen perro banner */
 .banner figure {
