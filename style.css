@@ -14,9 +14,6 @@ body::before {
   z-index: -1; /* Se queda detrás del contenido */
 }
 
-.custom-navbar {
-  min-height: 12vh;
-}
 
 /* banner */
 .banner {
@@ -25,9 +22,6 @@ body::before {
   background-size: auto;
   max-height: 65vh;
   display: flex;
-}
-body {
-  padding-top: 60px; /* Ajusta según el alto real del navbar */
 }
 
 /* Imagen perro banner */
