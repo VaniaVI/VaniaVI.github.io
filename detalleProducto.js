@@ -3,7 +3,7 @@ const params = new URLSearchParams(window.location.search);
 const prodid = params.get("prodid");
 const categoria = params.get("cat");
 
-// Simulación de productos locales (puedes reemplazar con fetch si lo deseas)
+// Simulación de productos locales
 const productos = [
   {
     id: "1",
@@ -35,32 +35,36 @@ const productos = [
   }
 ];
 
-// Buscar el producto por ID
-const producto = productos.find(p => p.id === prodid);
+// Buscar y mostrar el producto
+function mostrarProducto(id, categoria) {
+  const producto = productos.find(p => p.id === id);
 
-// Mostrar datos en el HTML
-if (producto) {
+  if (!producto) {
+    document.querySelector(".producto-detalle").innerHTML = "<p>Producto no encontrado.</p>";
+    return;
+  }
+
   document.getElementById("tituloProducto").textContent = producto.nombre;
   document.getElementById("precioProducto").textContent = `$${producto.precio}`;
   document.getElementById("descripcionProducto").textContent = producto.descripcion;
   document.getElementById("imagenPrincipal").src = producto.imagen;
   document.getElementById("categoriaProducto").textContent = categoria || "Sin categoría";
-} else {
-  document.querySelector(".producto-detalle").innerHTML = "<p>Producto no encontrado.</p>";
 }
 
-// Activar miniaturas (si las agregas dinámicamente)
-document.querySelectorAll('#miniaturas img').forEach(img => {
-  img.addEventListener('click', () => {
-    document.getElementById('imagenPrincipal').src = img.src;
+// Activar miniaturas
+function activarMiniaturas() {
+  document.querySelectorAll('#miniaturas img').forEach(img => {
+    img.addEventListener('click', () => {
+      document.getElementById('imagenPrincipal').src = img.src;
+    });
   });
-});
+}
 
-// (Opcional) Generar enlaces de prueba para ver cómo se comportan
-// Esto no debería estar en detalleProducto.js si ya estás en la página de detalle
-// Pero si lo usas para testear, mantenlo así:
-const enlacesContainer = document.getElementById("enlacesDePrueba"); // si existe
-if (enlacesContainer) {
+// Generar enlaces de prueba (solo si existe el contenedor)
+function generarEnlacesDePrueba() {
+  const enlacesContainer = document.getElementById("enlacesDePrueba");
+  if (!enlacesContainer) return;
+
   productos.forEach(p => {
     const link = document.createElement("a");
     link.href = `detalleProducto.html?prodid=${p.id}&cat=juguetes`;
@@ -69,3 +73,8 @@ if (enlacesContainer) {
     enlacesContainer.appendChild(link);
   });
 }
+
+// Ejecutar funciones
+mostrarProducto(prodid, categoria);
+activarMiniaturas();
+generarEnlacesDePrueba();
