@@ -11,13 +11,10 @@
 </head>
 
 <body>
-
   <header>
-    <!-- Restored original two-row navbar structure with proper collapse functionality -->
     <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top custom-navbar"
       style="font-family: 'Fredoka', sans-serif; font-weight: 400;">
       <div class="container flex-column">
-        <!-- PRIMERA FILA: menú + carrito -->
         <div class="d-flex w-100 justify-content-between align-items-center">
           <a class="navbar-brand" href="#" style="font-family: 'Fredoka', sans-serif; font-weight: 600;">PetSocity</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -28,9 +25,7 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Home</a>
-              </li>
+              <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false">Productos</a>
@@ -43,15 +38,10 @@
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Nosotros</a>
-              </li>
+              <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contacto</a>
-              </li>
+              <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
 
-              <!-- Added cart and login buttons inside collapse for mobile -->
               <!-- Cesta - Mobile -->
               <li class="nav-item d-xl-none">
                 <div class="d-flex align-items-center">
@@ -67,9 +57,8 @@
               <!-- Login/Register - Mobile -->
               <li class="nav-item d-xl-none">
                 <div class="d-flex flex-column gap-2 mt-2">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Iniciar sesión
-                  </button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Iniciar sesión</button>
                   <a class="btn btn-light border" href="/registroUsuario.html" role="button">Registrarse</a>
                 </div>
               </li>
@@ -81,18 +70,15 @@
                 <span class="material-icons">shopping_cart</span>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
               </div>
-              <li class="nav-item list-unstyled">
-                <a class="nav-link" href="#">Cesta</a>
-              </li>
+              <li class="nav-item list-unstyled"><a class="nav-link" href="#">Cesta</a></li>
             </div>
           </div>
         </div>
 
-        <!-- SEGUNDA FILA: login / registro - Desktop only -->
+        <!-- Login/Registro - Desktop -->
         <div id="loginRegistro" class="d-none d-xl-flex w-100 justify-content-end gap-3 mt-2">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Iniciar sesión
-          </button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Iniciar
+            sesión</button>
           <a class="btn btn-light border" href="/registroUsuario.html" role="button">Registrarse</a>
         </div>
       </div>
@@ -100,35 +86,24 @@
   </header>
 
   <main class="container mt-5 pt-5">
-
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
         <li class="breadcrumb-item" id="categoriaProducto">Categoría</li>
-        <li class="breadcrumb-item active" aria-current="page" id="tituloProducto">Nombre Producto</li>
+        <li class="breadcrumb-item active" aria-current="page" id="tituloProductoBreadcrumb">Nombre Producto</li>
       </ol>
     </nav>
 
     <!-- Detalle del producto -->
     <div class="row g-4 align-items-start producto-detalle">
-
       <!-- Columna izquierda: galería -->
       <div class="col-md-6">
-        <!-- Imagen principal -->
         <div class="mb-3 imagen-principal-wrapper">
-          <img id="imagenPrincipal" src="images/5bf28fae-d133-4bfe-b266-bfcd26f9bf19.png" class="img-fluid"
-            alt="Imagen principal del producto">
+          <img id="imagenPrincipal" src="" class="img-fluid" alt="Imagen principal del producto">
         </div>
-
-        <!-- Lista de miniaturas -->
         <div class="d-flex flex-wrap gap-2" id="miniaturas">
-          <img src="images/5bf28fae-d133-4bfe-b266-bfcd26f9bf19.png" class="img-thumbnail"
-            style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;" alt="Vista 1">
-          <img src="images/fondo-amarillo.png" class="img-thumbnail"
-            style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;" alt="Vista 2">
-          <img src="images/foto-banner.png" class="img-thumbnail"
-            style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;" alt="Vista 3">
+          <!-- Miniaturas dinámicas -->
         </div>
       </div>
 
@@ -149,7 +124,6 @@
 
         <button id="btnAgregar" class="btn btn-primary btn-lg">Añadir al carrito</button>
       </div>
-
     </div>
 
     <!-- Productos relacionados -->
@@ -159,14 +133,13 @@
         <!-- Productos relacionados dinámicos -->
       </div>
     </section>
-
   </main>
 
-
-  <!-- Inicio de footer -->
+  <!-- Footer -->
   <footer class="bg-white text-black pt-5 pb-4 text-center p-2 mt-3 border-top border-[#f8f9fa]">
     <div class="container text-md-start">
       <div class="row">
+        <!-- Columna 1 -->
         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
           <h6 class="text-uppercase fw-bold">PetSocity</h6>
           <p>Tu tienda online de productos y accesorios para mascotas.</p>
@@ -176,6 +149,8 @@
             <img src="https://img.icons8.com/?size=512&id=1433&format=png" alt="amex">
           </div>
         </div>
+
+        <!-- Columna 2 -->
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
           <h6 class="text-uppercase fw-bold">Links</h6>
           <ul class="list-unstyled">
@@ -186,10 +161,12 @@
             <li><a href="#" class="text-black text-decoration-none">Contacto</a></li>
           </ul>
         </div>
+
+        <!-- Columna 3 -->
         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-          <h6 class="text-uppercase fw-bold">Subscribete a nuestro newsletter</h6>
+          <h6 class="text-uppercase fw-bold">Suscríbete a nuestro newsletter</h6>
           <div class="input-group form-sub">
-            <div class="form-floating ">
+            <div class="form-floating">
               <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
               <label for="floatingInput">Email address</label>
             </div>
@@ -198,12 +175,13 @@
         </div>
       </div>
     </div>
+
     <div class="text-center pt-3 mt-3 border-top border-[#f8f9fa]">
       <p class="mb-0">&copy; 2025 PetSocity. Todos los derechos reservados.</p>
     </div>
   </footer>
 
-
+  <!-- Scripts -->
   <script src="detalleProducto.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

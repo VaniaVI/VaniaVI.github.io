@@ -23,6 +23,9 @@ body::before {
   max-height: 65vh;
   display: flex;
 }
+body {
+  padding-top: 60px; /* Ajusta según el alto real del navbar */
+}
 
 /* Imagen perro banner */
 .banner figure {
