@@ -79,7 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
               <h5 class="card-title">${p.nombre}</h5>
               <div class="mt-auto d-flex justify-content-between align-items-center">
                 <span class="price">$${p.precio}</span>
-                <button class="btn btn-sm btn-primary">Agregar</button>
+                <a href="detalleProducto.html" class="btn btn-sm btn-primary">Ver detalle</a>
+                
               </div>
             </div>
           </div>
