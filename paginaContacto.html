@@ -4,15 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contacto | PetSocity</title>
-
-  <!-- Estilos base del proyecto -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Hoja de estilos -->
   <link rel="stylesheet" href="./style.css">
-  <!-- Cargamos Material Icons porque las usamos en el navbar -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="./logoPetsocity.png" type="image/x-icon">
 </head>
 <body>
 
@@ -124,62 +120,84 @@
         </nav>
     </header>
 
-  <main class="container pb-5 mt-4 contacto">
-    <!-- Cabecera cortita para ubicar al usuario -->
-    <section class="text-center mb-4">
-      <div class="mx-auto mb-3" style="width:260px;height:140px;background:#e9ecef;border:1px solid #dee2e6;border-radius:.5rem;"></div>
-      <h1 class="fw-bold">Contáctanos</h1>
-    </section>
-
-    <!-- Formulario dentro de una card -->
-    <section class="row justify-content-center">
-      <div class="col-12 col-md-8 col-lg-6">
-        <div class="card shadow-sm">
-          <div class="card-header text-center text-uppercase small fw-semibold bg-light">
-            Formulario de Contacto
-          </div>
+  <main class="container py-5">
+    <div class="row g-4">
+      <!-- INFO -->
+      <section class="col-12 col-lg-5">
+        <div class="card shadow-sm h-100">
           <div class="card-body">
-            <!-- Estos IDs conversan con contacto.js -->
-            <form id="f" novalidate>
-              <!-- Nombre (máx 100) -->
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre completo</label>
-                <input id="nombre" name="nombre" class="form-control" maxlength="100" required />
-                <div class="d-flex gap-2">
-                  <div id="err-nombre" class="invalid-feedback d-block"></div>
-                  <small class="ms-auto text-muted" id="cnt-nombre">0/100</small>
+            <h1 class="h4">Contáctanos</h1>
+            <p class="text-muted mb-4">Respondemos dentro de 24–48 horas hábiles.</p>
+            <ul class="list-unstyled small mb-0">
+              <li class="mb-2"><span class="fw-semibold">Email:</span> soporte@proyecto.cl</li>
+              <li class="mb-2"><span class="fw-semibold">Teléfono:</span> +56 9 1234 5678</li>
+              <li class="mb-2"><span class="fw-semibold">Horario:</span> Lunes a Viernes, 9:00–18:00</li>
+              <li class="mb-0"><span class="fw-semibold">Dirección:</span> Av. Siempre Viva 123, Santiago</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- FORM -->
+      <section class="col-12 col-lg-7">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="h5">Envíanos un mensaje</h2>
+            <form id="contactoForm" novalidate>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" name="nombre"
+                         required minlength="2" maxlength="100">
+                  <div class="form-text">Máx. 100 caracteres.</div>
+                  <div class="invalid-feedback">Ingresa tu nombre (2–100 caracteres).</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email"
+                         required maxlength="100" inputmode="email">
+                  <div class="form-text">Solo @duoc.cl, @profesor.duoc.cl o @gmail.com (máx. 100).</div>
+                  <div class="invalid-feedback">Ingresa un correo válido.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="asunto" class="form-label">Asunto</label>
+                  <input type="text" class="form-control" id="asunto" name="asunto" required>
+                  <div class="invalid-feedback">Escribe un asunto.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="mensaje" class="form-label">Mensaje</label>
+                  <textarea class="form-control" id="mensaje" name="mensaje"
+                            rows="5" required minlength="10" maxlength="500"></textarea>
+                  <div class="form-text">Máx. 500 caracteres.</div>
+                  <div class="invalid-feedback">Cuéntanos tu consulta (10–500 caracteres).</div>
+                </div>
+
+                <div class="col-12 d-flex align-items-center gap-2">
+                  <input class="form-check-input" type="checkbox" id="acepto" required>
+                  <label class="form-check-label small" for="acepto">
+                    Acepto el uso de mis datos para responder mi consulta.
+                  </label>
+                  <div class="invalid-feedback d-block" id="aceptoFeedback" style="display:none;">
+                    Debes aceptar para continuar.
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <button class="btn btn-primary w-100" type="submit">Enviar</button>
+                </div>
+
+                <div class="col-12">
+                  <div id="alertaForm" class="alert d-none" role="alert"></div>
                 </div>
               </div>
-
-              <!-- Correo opcional, pero solo con dominios especificos -->
-              <div class="mb-3">
-                <label for="correo" class="form-label">Correo (opcional)</label>
-                <input id="correo" name="correo" class="form-control" placeholder="ej: nombre@duoc.cl" maxlength="100" inputmode="email" />
-                <div class="d-flex flex-wrap gap-2">
-                  <div id="err-correo" class="invalid-feedback d-block"></div>
-                  <small class="text-muted">Usa @duoc.cl, @profesor.duoc.cl o @gmail.com</small>
-                  <small class="ms-auto text-muted" id="cnt-correo">0/100</small>
-                </div>
-              </div>
-
-              <!-- Comentario requerido (máx 500) -->
-              <div class="mb-3">
-                <label for="comentario" class="form-label">Comentario</label>
-                <textarea id="comentario" name="comentario" rows="4" class="form-control" maxlength="500" required></textarea>
-                <div class="d-flex gap-2">
-                  <div id="err-comentario" class="invalid-feedback d-block"></div>
-                  <small class="ms-auto text-muted" id="cnt-comentario">0/500</small>
-                </div>
-              </div>
-
-              <!-- Botón de envío + mensaje de éxito -->
-              <button class="btn btn-primary" type="submit">Enviar mensaje</button>
-              <span id="ok" class="ms-2 text-success fw-semibold" role="status" aria-live="polite"></span>
             </form>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 
   <!-- Footer -->
