@@ -1,11 +1,3 @@
-/* Fondo general tipo Apple */
-body {
-  background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
-  font-family: 'Segoe UI', sans-serif;
-  color: #333;
-  min-height: 100vh;
-}
-
 /* Título destacado */
 .titulo-enmarcado {
   background-color: #f8f9fa;
@@ -19,7 +11,7 @@ body {
 .registro-wrapper {
   display: flex;
   justify-content: center;
-  padding: 40px 20px;
+  
 }
 
 /* Tarjeta tipo ventana elegante */
@@ -38,18 +30,38 @@ body {
 }
 
 /* Inputs generales */
+/* Inputs generales */
 .form-control,
 .form-select {
   border-radius: 0.75rem;
   border: 1px solid #ced4da;
   padding: 0.75rem;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-size: 1rem;
 }
 
+/* Enfocado */
 .form-control:focus,
 .form-select:focus {
   border-color: #0d6efd;
   box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Contenedor visual */
+.shadow-sm {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.fw-semibold {
+  font-weight: 600;
+}
+
+.text-primary {
+  color: #0d6efd;
 }
 
 /* Etiquetas */
