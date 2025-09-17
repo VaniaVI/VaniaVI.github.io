@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetSocity</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/styles/style.css" rel="stylesheet">
+</head>
+<body>
+  <!--  Header / NAVBAR -->
+    <header>
+        <!-- Restored original two-row navbar structure with proper collapse functionality -->
+        <nav class="navbar navbar-expand-xl navbar-light bg-light custom-navbar" style="font-family: 'Fredoka', sans-serif; font-weight: 400;">
+            <div class="container flex-column">
+                <!-- PRIMERA FILA: menú + carrito -->
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                      <img src="./image/logoPetsocity.png" alt="Logo Petsocity" height="80">
+                      <span style="font-family: 'Fredoka', sans-serif; font-weight: 600;">Petsocity</span>
+                    </a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/index.html">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                >
+                                Productos
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=todos">Ver todos los productos</a></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=accesorios">Accesorios</a></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=alimentos">Alimentos</a></li>
+                                  <li><hr class="dropdown-divider" /></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=ofertas">Ofertas especiales</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/nosotros.html">Nosotros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/blogs.html">Blogs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contacto.html">Contacto</a>
+                            </li>
+                            
+                            <!-- Added cart and login buttons inside collapse for mobile -->
+                            <!-- Cesta - Mobile -->
+                            <li class="nav-item d-xl-none">
+                                <div class="d-flex align-items-center">
+                                    <div class="position-relative d-inline-block me-3">
+                                        <span class="material-symbols-outlined">add_shopping_cart</span>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                                    </div>
+                                    <a class="nav-link" href="/carritoCompra.html">Carrito</a>
+                                </div>
+                            </li>
+                            
+                            <!-- Login/Register - Mobile -->
+                            <li class="nav-item d-xl-none">
+                                <div class="d-flex flex-column gap-2 mt-2">
+                                    <button
+                                        type="button"
+                                        class="btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                        <span class="material-symbols-outlined">account_circle</span>
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- Cesta - Desktop -->
+                        <div class="d-none d-xl-flex align-items-center pe-5">
+                        <!-- Cesta + Login - Desktop -->
+                        <div class="d-none d-xl-flex align-items-center gap-3 pe-5">
+                        <!-- Botón de inicio de sesión -->
+                            <button
+                            type="button"
+                            class="btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            <span class="material-symbols-outlined">account_circle</span>
+                            </button>
+                      
+                        <!-- Ícono del carrito -->
+                            <div class="position-relative d-inline-block">
+                            <span class="material-symbols-outlined">add_shopping_cart</span>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                            </div>
+                      
+                        <!-- Enlace a la cesta -->
+                        <li class="nav-item list-unstyled">
+                            <a class="nav-link" href="#">Carrito</a>
+                        </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<main>
+  <!-- Estilos locales -->
+  <style>
+    .nos-hero {position: relative; background: linear-gradient(135deg,#0d3b66 0%,#0a2a4a 60%,#08223a 100%); color:#fff;
+      overflow:hidden; padding: clamp(2.2rem, 5vw, 3.5rem) 0 clamp(2.2rem, 5vw, 3.2rem); min-height: clamp(260px, 38vw, 420px);}
+    .nos-curve-top{position:absolute; inset:0; top:-42%; opacity:.28; pointer-events:none;}
+    .nos-curve-bottom{position:absolute; left:0; right:0; bottom:-2px;}
+    .nos-quote{background:#fff; color:#0d3b66; border-radius:999px; padding: clamp(1.2rem, 2.5vw, 2rem);
+      box-shadow:0 10px 30px rgba(0,0,0,.12); max-width: clamp(280px, 40vw, 420px);}
+    .nos-card{position: relative; z-index: 2; margin-top: clamp(-36px, -6vw, -56px); background:#fff;
+      border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,.08); padding: clamp(1.25rem, 2vw, 2rem);}
+    .nos-icon{width:44px; height:44px; border-radius:50%; background:#eef6ff; display:inline-flex; align-items:center; justify-content:center; margin-right:.75rem;}
+  </style>
+
+  <!-- HERO -->
+  <section class="nos-hero">
+    <svg class="nos-curve-top" viewBox="0 0 1440 480" preserveAspectRatio="none">
+      <path d="M0,120 C300,240 600,0 900,120 C1140,210 1290,90 1440,150 L1440,0 L0,0 Z" fill="#fff"/>
+    </svg>
+
+    <div class="container position-relative">
+      <div class="row align-items-center g-4 py-2">
+        <div class="col-12 col-lg-5">
+          <div class="nos-quote">
+            <p class="mb-2">
+              “En PetSocity creemos que las mascotas merecen lo mejor. Nuestra tienda ofrece
+              alimentos y accesorios de calidad.”
+            </p>
+            <small class="text-muted d-block">Cliente destacado</small>
+            <span style="display:inline-block; font-weight:700; letter-spacing:.08em; color:#0d3b66;">PETSOCITY</span>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-7">
+          <h1 class="h3 fw-bold mb-3">El futuro del <span class="text-warning">pet-commerce</span></h1>
+          <p class="mb-2">
+            Las familias buscan facilidad y confianza al comprar productos para sus mascotas.
+            Nuestra plataforma simplifica la compra y ofrece una experiencia clara y cercana.
+          </p>
+          <p class="mb-0">
+            En PetSocity encuentras alimentos y accesorios a tiempo, con el respaldo de una tienda
+            enfocada en calidad y confianza para cada cliente
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <svg class="nos-curve-bottom" viewBox="0 0 1440 160" preserveAspectRatio="none">
+      <path d="M0,80 C240,140 480,20 720,60 C960,100 1200,140 1440,80 L1440,160 L0,160 Z" fill="#fff"/>
+    </svg>
+  </section>
+
+  <!-- CONTENIDO -->
+  <section class="container">
+    <div class="nos-card">
+      <div class="row g-4">
+        <div class="col-12 col-lg-6">
+          <h2 class="h5 fw-bold">Nuestra misión</h2>
+          <p class="text-muted mb-0">
+            Facilitar el acceso a productos para mascotas, con despachos puntuales
+            y un amplio catálogo de marcas confiables
+          </p>
+        </div>
+        <div class="col-12 col-lg-6">
+          <h2 class="h5 fw-bold">Nuestra visión</h2>
+          <p class="text-muted mb-0">
+            Ser la tienda online chilena de referencia en bienestar animal, ofreciendo experiencias de compra
+            seguras y personalizadas para cada cliente
+          </p>
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col d-flex">
+          <div class="nos-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0d3b66"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          </div>
+          <div>
+            <h3 class="h6 mb-1">Calidad confiable</h3>
+            <p class="small text-muted mb-0">Marcas probadas y reseñas reales de clientes</p>
+          </div>
+        </div>
+        <div class="col d-flex">
+          <div class="nos-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0d3b66"><path d="M12 21c4.97 0 9-4.03 9-9S16.97 3 12 3 3 7.03 3 12s4.03 9 9 9zM7 12l2.5 2.5L17 7"/></svg>
+          </div>
+          <div>
+            <h3 class="h6 mb-1">Variedad de productos</h3>
+            <p class="small text-muted mb-0">Accesorios, alimentos y más para todas las mascotas</p>
+          </div>
+        </div>
+        <div class="col d-flex">
+          <div class="nos-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0d3b66"><path d="M20 8h-3V4H7v4H4v12h16V8zm-9 9H7v-2h4v2zm6 0h-5v-2h5v2zM9 6h6v2H9V6z"/></svg>
+          </div>
+          <div>
+            <h3 class="h6 mb-1">Logística a tiempo</h3>
+            <p class="small text-muted mb-0">Despachos rápidos y seguimiento de tu compra</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="p-4 p-md-5 bg-light rounded-4 d-flex flex-column flex-md-row align-items-md-center justify-content-between my-5">
+      <div class="mb-3 mb-md-0">
+        <h3 class="h5 mb-1">¿Quieres sumarte a PetSocity?</h3>
+        <p class="mb-0 text-muted">Descubre nuestra tienda online y encuentra lo que tu mascota necesita</p>
+      </div>
+      <div class="d-flex gap-2">
+        <a href="/productos.html" class="btn btn-primary">Ver productos</a>
+        <a href="/paginaContacto.html" class="btn btn-outline-primary">Contáctanos</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+    <!-- Footer igual que en index -->
+    <footer class="bg-white text-black pt-5 pb-4 text-center p-2 mt-3 border-top border-[#f8f9fa]">
+        <div class="container text-md-start">
+            <div class="row">
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold">PetSocity</h6>
+                    <p>Tu tienda online de productos y accesorios para mascotas.</p>
+                    <div class="img-cards">
+                        <img src="https://img.icons8.com/?size=512&id=1429&format=png" alt="visa">
+                        <img src="https://img.icons8.com/?size=512&id=1431&format=png" alt="mastercard">
+                        <img src="https://img.icons8.com/?size=512&id=1433&format=png" alt="amex">
+                    </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold">Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-black text-decoration-none">Home</a></li>
+                        <li><a href="#" class="text-black text-decoration-none">Productos</a></li>
+                        <li><a href="#" class="text-black text-decoration-none">Nosotros</a></li>
+                        <li><a href="#" class="text-black text-decoration-none">Blogs</a></li>
+                        <li><a href="#" class="text-black text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase fw-bold">Subscribete a nuestro newsletter</h6>
+                    <div class="input-group form-sub">
+                        <div class="form-floating ">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+                            <label for="floatingInput">Email address</label>
+                        </div>
+                        <button type="button" class="btn-suscribir">Suscríbete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center pt-3 mt-3 border-top border-[#f8f9fa]">
+            <p class="mb-0">&copy; 2025 PetSocity. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
+    <script src="/js/index.js"></script>
+</body>
+</html>
