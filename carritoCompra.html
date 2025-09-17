@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrito | PetSocity</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ====================== HEADER ====================== -->
+  <!--  Header / NAVBAR -->
+    <header>
+        <!-- Restored original two-row navbar structure with proper collapse functionality -->
+        <nav class="navbar navbar-expand-xl navbar-light bg-light custom-navbar" style="font-family: 'Fredoka', sans-serif; font-weight: 400;">
+            <div class="container flex-column">
+                <!-- PRIMERA FILA: menú + carrito -->
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                      <img src="./logoPetsocity.png" alt="Logo Petsocity" height="80">
+                      <span style="font-family: 'Fredoka', sans-serif; font-weight: 600;">Petsocity</span>
+                    </a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/index.html">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                >
+                                Productos
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=todos">Ver todos los productos</a></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=accesorios">Accesorios</a></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=alimentos">Alimentos</a></li>
+                                  <li><hr class="dropdown-divider" /></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=ofertas">Ofertas especiales</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/nosotros.html">Nosotros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/blogs.html">Blogs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contacto.html">Contacto</a>
+                            </li>
+                            
+                            <!-- Added cart and login buttons inside collapse for mobile -->
+                            <!-- Cesta - Mobile -->
+                            <li class="nav-item d-xl-none">
+                                <div class="d-flex align-items-center">
+                                    <div class="position-relative d-inline-block me-3">
+                                        <span class="material-symbols-outlined">add_shopping_cart</span>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                                    </div>
+                                    <a class="nav-link" href="/carritoCompra.html">Carrito</a>
+                                </div>
+                            </li>
+                            
+                            <!-- Login/Register - Mobile -->
+                            <li class="nav-item d-xl-none">
+                                <div class="d-flex flex-column gap-2 mt-2">
+                                    <button
+                                        type="button"
+                                        class="btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                        <span class="material-symbols-outlined">account_circle</span>
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- Cesta - Desktop -->
+                        <div class="d-none d-xl-flex align-items-center pe-5">
+                        <!-- Cesta + Login - Desktop -->
+                        <div class="d-none d-xl-flex align-items-center gap-3 pe-5">
+                        <!-- Botón de inicio de sesión -->
+                            <button
+                            type="button"
+                            class="btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            <span class="material-symbols-outlined">account_circle</span>
+                            </button>
+                      
+                        <!-- Ícono del carrito -->
+                            <div class="position-relative d-inline-block">
+                            <span class="material-symbols-outlined">add_shopping_cart</span>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                            </div>
+                      
+                        <!-- Enlace a la cesta -->
+                        <li class="nav-item list-unstyled">
+                            <a class="nav-link" href="#">Carrito</a>
+                        </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+  <!-- ==================== /HEADER ==================== -->
+
+  <!-- ==================== CONTENIDO ==================== -->
+  <main class="container py-5">
+    <h1 class="h4 mb-4">Tu carrito</h1>
+
+    <div class="row g-4">
+      <!-- Lista de ítems -->
+      <div class="col-12 col-lg-8">
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th class="text-center" style="width: 140px;">Cantidad</th>
+                <th class="text-end" style="width: 140px;">Precio</th>
+                <th class="text-end" style="width: 140px;">Subtotal</th>
+                <th class="text-center" style="width: 80px;"></th>
+              </tr>
+            </thead>
+            <tbody id="carritoBody"></tbody>
+          </table>
+        </div>
+
+        <div class="d-flex gap-2">
+          <button id="btnVaciar" class="btn btn-outline-secondary">Vaciar carrito</button>
+        </div>
+      </div>
+
+      <!-- Resumen -->
+      <div class="col-12 col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="h6">Resumen</h2>
+
+            <div class="d-flex justify-content-between small mb-2">
+              <span>Subtotal</span><strong id="resSubtotal">$0</strong>
+            </div>
+            <div class="d-flex justify-content-between small mb-2">
+              <span>Envío</span><strong id="resEnvio">$0</strong>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between fs-5 mb-3">
+              <span>Total</span><strong id="resTotal">$0</strong>
+            </div>
+
+            <div class="mb-3">
+              <label for="metodoEnvio" class="form-label">Método de envío</label>
+              <select id="metodoEnvio" class="form-select">
+                <option value="retiro">Retiro en tienda (gratis)</option>
+                <option value="normal">Despacho normal ($3.990)</option>
+                <option value="express">Despacho express ($6.990)</option>
+              </select>
+            </div>
+
+            <button id="btnPagar" class="btn btn-primary w-100" type="button">Ir a pagar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ====================== FOOTER ====================== -->
+  <footer class="bg-white text-black pt-5 pb-4 text-center p-2 mt-3 border-top border-[#f8f9fa]">
+    <div class="container text-md-start">
+      <div class="row">
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+          <h6 class="text-uppercase fw-bold">PetSocity</h6>
+          <p>Tu tienda online de productos y accesorios para mascotas.</p>
+          <div class="img-cards">
+            <img src="https://img.icons8.com/?size=512&id=1429&format=png" alt="visa">
+            <img src="https://img.icons8.com/?size=512&id=1431&format=png" alt="mastercard">
+            <img src="https://img.icons8.com/?size=512&id=1433&format=png" alt="amex">
+          </div>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+          <h6 class="text-uppercase fw-bold">Links</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-black text-decoration-none">Home</a></li>
+            <li><a href="#" class="text-black text-decoration-none">Productos</a></li>
+            <li><a href="#" class="text-black text-decoration-none">Nosotros</a></li>
+            <li><a href="#" class="text-black text-decoration-none">Blogs</a></li>
+            <li><a href="#" class="text-black text-decoration-none">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <h6 class="text-uppercase fw-bold">Subscribete a nuestro newsletter</h6>
+          <div class="input-group form-sub">
+            <div class="form-floating ">
+              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+              <label for="floatingInput">Email address</label>
+            </div>
+            <button type="button" class="btn-suscribir">Suscríbete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center pt-3 mt-3 border-top border-[#f8f9fa]">
+      <p class="mb-0">&copy; 2025 PetSocity. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- JS base -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Lógica del carrito -->
+  <script defer src="./carrito.js"></script>
+</body>
+</html>
