@@ -51,10 +51,15 @@
       </div>`;
   }
 
-  function updateBadge() {
-    if (!BADGE) return;
-    const totalItems = getCart().reduce((acc, it) => acc + (it.cant || 0), 0);
-    BADGE.textContent = totalItems;
+function updateBadge() {
+  const totalItems = getCart().reduce((acc, it) => acc + (it.cant || 0), 0);
+  const BADGES = document.querySelectorAll(".badgeCarrito");
+
+  BADGES.forEach(badge => {
+    badge.textContent = totalItems;
+  });
+
+
   }
 
   function render() {
