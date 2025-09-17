@@ -1,5 +1,6 @@
 
   // 👉 Aquí defines tus productos
+// 👉 Aquí defines tus productos Tendencias
     const productos = [
       { nombre: "Producto 1", precio: "9.990", descripcion: "Descripción breve del producto 1", imagen: "https://i.pinimg.com/736x/6a/89/48/6a8948b559735c80860cdf2169efc874.jpg" },
       { nombre: "Producto 2", precio: "12.990", descripcion: "Descripción breve del producto 2", imagen: "https://i.pinimg.com/736x/66/37/c3/6637c3eb58091edca0f717094b341e67.jpg" },
@@ -10,7 +11,7 @@
     ];
 
     // 👉 Contenedor donde van las cards
-    const container = document.getElementById("productContainer");
+    const container = document.getElementById("productTrendContainer");
 
     // 👉 Crear dinámicamente las cards
     productos.forEach(p => {
