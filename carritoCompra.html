@@ -5,13 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Carrito | PetSocity</title>
 
-  <!-- Misma base que el resto del sitio -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
-  <!-- Íconos que usamos en el navbar -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Favicon (lo manejas tú) -->
-  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2171/2171981.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 
@@ -90,41 +86,62 @@
   <!-- ==================== /HEADER ==================== -->
 
   <!-- ==================== CONTENIDO ==================== -->
-  <main class="container pb-5" style="margin-top: 14vh;">
-    <!-- Título + CTA para volver a productos -->
-    <div class="d-flex align-items-center justify-content-between mb-3">
-      <h1 class="h3 mb-0">Carrito</h1>
-      <a href="./productos.html" class="btn btn-outline-secondary btn-sm">Seguir comprando</a>
-    </div>
+  <main class="container py-5">
+    <h1 class="h4 mb-4">Tu carrito</h1>
 
-    <!-- Tabla del carrito (se llena con JS) -->
-    <div class="table-responsive">
-      <table class="table align-middle" id="cartTable">
-        <thead class="table-light">
-          <tr>
-            <th style="width:56px;"></th>
-            <th>Producto</th>
-            <th class="text-end">Precio</th>
-            <th style="width:140px;">Cantidad</th>
-            <th class="text-end">Subtotal</th>
-            <th style="width:56px;"></th>
-          </tr>
-        </thead>
-        <tbody id="cartBody"></tbody>
-        <tfoot>
-          <tr>
-            <td colspan="4" class="text-end fw-semibold">Total</td>
-            <td class="text-end fw-bold" id="cartTotal">$0</td>
-            <td></td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+    <div class="row g-4">
+      <!-- Lista de ítems -->
+      <div class="col-12 col-lg-8">
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th class="text-center" style="width: 140px;">Cantidad</th>
+                <th class="text-end" style="width: 140px;">Precio</th>
+                <th class="text-end" style="width: 140px;">Subtotal</th>
+                <th class="text-center" style="width: 80px;"></th>
+              </tr>
+            </thead>
+            <tbody id="carritoBody"></tbody>
+          </table>
+        </div>
 
-    <!-- Acciones del carrito -->
-    <div class="d-flex gap-2 justify-content-end">
-      <button id="btnClear" class="btn btn-outline-danger">Vaciar carrito</button>
-      <button id="btnCheckout" class="btn btn-primary">Pagar</button>
+        <div class="d-flex gap-2">
+          <button id="btnVaciar" class="btn btn-outline-secondary">Vaciar carrito</button>
+        </div>
+      </div>
+
+      <!-- Resumen -->
+      <div class="col-12 col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2 class="h6">Resumen</h2>
+
+            <div class="d-flex justify-content-between small mb-2">
+              <span>Subtotal</span><strong id="resSubtotal">$0</strong>
+            </div>
+            <div class="d-flex justify-content-between small mb-2">
+              <span>Envío</span><strong id="resEnvio">$0</strong>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between fs-5 mb-3">
+              <span>Total</span><strong id="resTotal">$0</strong>
+            </div>
+
+            <div class="mb-3">
+              <label for="metodoEnvio" class="form-label">Método de envío</label>
+              <select id="metodoEnvio" class="form-select">
+                <option value="retiro">Retiro en tienda (gratis)</option>
+                <option value="normal">Despacho normal ($3.990)</option>
+                <option value="express">Despacho express ($6.990)</option>
+              </select>
+            </div>
+
+            <button id="btnPagar" class="btn btn-primary w-100" type="button">Ir a pagar</button>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
