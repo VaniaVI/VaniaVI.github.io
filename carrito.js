@@ -1,135 +1,162 @@
-// Maneja el carrito usando localStorage.
-// Dibuja la tabla con tus productos
-// Permite sumar/restar/eliminar
-// Calcula total en CLP
+// Carrito — LocalStorage + reglas
+// Cantidad mínima 1, máxima 10 por producto
+// Soporta botones en otras páginas (productos/detalle)
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Convertidor de CLP
-  const CLP = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
+(() => {
+  const DEFAULT_KEY = 'carritoItems';
+  const MAX_QTY     = 10;
 
-  // Atajos al DOM 
-  const $ = (sel) => document.querySelector(sel);
-  const TBODY = $('#cartBody');
-  const TOTAL = $('#cartTotal');
-  const BTN_CLEAR = $('#btnClear');
-  const BTN_CHECKOUT = $('#btnCheckout');
+  // Intento respetar una clave previa si ya existía algo que contenga "carrito"
+  function detectKey() {
+    const keys = Object.keys(localStorage);
+    return keys.find(k => /carrito/i.test(k)) || DEFAULT_KEY;
+  }
+  let STORAGE_KEY = detectKey();
 
-  // --- Helpers de estado (localStorage) ---
-  const getCart = () => {
-    try { return JSON.parse(localStorage.getItem('cart') || '[]'); }
-    catch { return []; }
-  };
-  const setCart = (arr) => localStorage.setItem('cart', JSON.stringify(arr));
+  // Utilidades
+  const $  = (sel, ctx=document) => ctx.querySelector(sel);
+  const fmtCLP = (n) => (n ?? 0).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
 
-  // Acepta "9.990" o 9990, y devuelve número
-  const toIntPrice = (p) => {
-    if (typeof p === 'number') return Math.round(p);
-    if (typeof p === 'string') return Number(p.replace(/\./g, '').replace(/[^0-9]/g, '') || 0);
-    return 0;
-  };
+  // DOM
+  const tbody       = $('#carritoBody');
+  const resSubtotal = $('#resSubtotal');
+  const resEnvio    = $('#resEnvio');
+  const resTotal    = $('#resTotal');
+  const metodoEnvio = $('#metodoEnvio');
+  const BTN_CLEAR   = $('#btnVaciar');
+  const BTN_PAGAR   = $('#btnPagar');
+  const BADGE       = $('#badgeCarrito');
 
-  // Suma total del carrito
-  const getTotal = (cart) => cart.reduce((acc, it) => acc + toIntPrice(it.price) * it.qty, 0);
-
-  // Dibuja una fila de producto
-  const row = (it) => {
-    const price = toIntPrice(it.price);
-    return `
-      <tr data-key="${it.key}">
-        <td>
-          <img src="${it.img}" alt="Foto de ${it.name}" width="48" height="48"
-               style="object-fit:cover;border-radius:.4rem" />
-        </td>
-        <td>
-          <div class="fw-semibold">${it.name}</div>
-        </td>
-        <td class="text-end">${CLP.format(price)}</td>
-        <td>
-          <div class="input-group input-group-sm" style="max-width:140px;">
-            <button class="btn btn-outline-secondary" data-act="dec">-</button>
-            <input class="form-control text-center" type="number" min="1" value="${it.qty}" data-role="qty">
-            <button class="btn btn-outline-secondary" data-act="inc">+</button>
-          </div>
-        </td>
-        <td class="text-end">${CLP.format(price * it.qty)}</td>
-        <td class="text-end">
-          <button class="btn btn-sm btn-outline-danger" title="Eliminar" data-act="del">
-            <span class="material-icons" style="font-size:18px;vertical-align:middle;">delete</span>
-          </button>
-        </td>
-      </tr>
-    `;
-  };
-
-  // Vuelve a pintar la tabla completa y el total
-  function render() {
-    const cart = getCart();
-    if (cart.length === 0) {
-      TBODY.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-4">Tu carrito está vacío.</td></tr>`;
-      TOTAL.textContent = CLP.format(0);
-      BTN_CHECKOUT?.setAttribute('disabled', 'true');
-      BTN_CLEAR?.setAttribute('disabled', 'true');
-      return;
-    }
-
-    TBODY.innerHTML = cart.map(row).join('');
-    TOTAL.textContent = CLP.format(getTotal(cart));
-    BTN_CHECKOUT?.removeAttribute('disabled');
-    BTN_CLEAR?.removeAttribute('disabled');
+  // Estado
+  function getCart() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; }
+  }
+  function setCart(arr) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
   }
 
-  // Delegación de eventos: click en + / - / eliminar
-  TBODY.addEventListener('click', (e) => {
-    const tr = e.target.closest('tr[data-key]');
-    const btn = e.target.closest('[data-act]');
-    if (!tr || !btn) return;
+  function envioPrecio() {
+    const v = metodoEnvio?.value;
+    if (v === 'normal')  return 3990;
+    if (v === 'express') return 6990;
+    return 0; // retiro
+  }
 
-    const key = tr.dataset.key;
-    let cart = getCart();
-    const i = cart.findIndex(x => x.key === key);
-    if (i < 0) return;
+  function qtyButtons(id, qty) {
+    return `
+      <div class="btn-group" role="group">
+        <button class="btn btn-sm btn-outline-secondary" data-action="dec" data-id="${id}">−</button>
+        <button class="btn btn-sm btn-light disabled">${qty}</button>
+        <button class="btn btn-sm btn-outline-secondary" data-action="inc" data-id="${id}">+</button>
+      </div>`;
+  }
 
-    const act = btn.dataset.act;
-    if (act === 'inc') cart[i].qty += 1;
-    if (act === 'dec') cart[i].qty = Math.max(1, cart[i].qty - 1);
-    if (act === 'del') cart.splice(i, 1);
+  function updateBadge() {
+    if (!BADGE) return;
+    const totalItems = getCart().reduce((acc, it) => acc + (it.qty || 0), 0);
+    BADGE.textContent = totalItems;
+  }
+
+  function render() {
+    const items = getCart();
+    let html = '';
+    let subtotal = 0;
+
+    for (const it of items) {
+      const qty = Math.min(Math.max(it.qty || 1, 1), MAX_QTY);
+      const price = Number(it.precio || 0);
+      const st = price * qty;
+      subtotal += st;
+
+      html += `
+        <tr>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              ${it.imagen ? `<img src="${it.imagen}" alt="${it.nombre || 'Producto'}" width="48" height="48" class="rounded">` : ''}
+              <div>
+                <div class="fw-semibold">${it.nombre || 'Producto'}</div>
+                <div class="text-muted small">ID: ${it.id || '-'}</div>
+              </div>
+            </div>
+          </td>
+          <td class="text-center">${qtyButtons(it.id, qty)}</td>
+          <td class="text-end">${fmtCLP(price)}</td>
+          <td class="text-end">${fmtCLP(st)}</td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-outline-danger" data-action="del" data-id="${it.id}">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>`;
+    }
+
+    if (tbody) {
+      tbody.innerHTML = html || '<tr><td colspan="5" class="text-center text-muted">Tu carrito está vacío</td></tr>';
+    }
+
+    const envio = envioPrecio();
+    if (resSubtotal) resSubtotal.textContent = fmtCLP(subtotal);
+    if (resEnvio)    resEnvio.textContent    = fmtCLP(envio);
+    if (resTotal)    resTotal.textContent    = fmtCLP(subtotal + envio);
+
+    updateBadge();
+  }
+
+  // Eventos
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+
+    const id = btn.getAttribute('data-id');
+    const action = btn.getAttribute('data-action');
+    const cart = getCart();
+    const idx = cart.findIndex(x => String(x.id) === String(id));
+    if (idx === -1) return;
+
+    if (action === 'inc') cart[idx].qty = Math.min(MAX_QTY, (cart[idx].qty || 1) + 1);
+    if (action === 'dec') cart[idx].qty = Math.max(1, (cart[idx].qty || 1) - 1);
+    if (action === 'del') cart.splice(idx, 1);
 
     setCart(cart);
     render();
   });
 
-  // Cambiar cantidad escribiendo en el input
-  TBODY.addEventListener('change', (e) => {
-    const input = e.target.closest('input[data-role="qty"]');
-    if (!input) return;
+  metodoEnvio && metodoEnvio.addEventListener('change', render);
 
-    const tr = e.target.closest('tr[data-key]');
-    const key = tr.dataset.key;
-
-    let cart = getCart();
-    const i = cart.findIndex(x => x.key === key);
-    if (i < 0) return;
-
-    let val = parseInt(input.value, 10);
-    if (isNaN(val) || val < 1) val = 1;
-    cart[i].qty = val;
-
-    setCart(cart);
-    render();
-  });
-
-  // Vaciar carrito (confirmación simple)
-  BTN_CLEAR?.addEventListener('click', () => {
+  BTN_CLEAR && BTN_CLEAR.addEventListener('click', () => {
     if (!confirm('¿Vaciar carrito?')) return;
     setCart([]);
     render();
   });
 
-  // “Pagar” simulado (para la entrega del ramo basta)
-  BTN_CHECKOUT?.addEventListener('click', () => {
-    alert('Flujo de pago simulado 🙂');
+  BTN_PAGAR && BTN_PAGAR.addEventListener('click', () => {
+    alert('Flujo de pago');
   });
 
-  // Primera pintada al cargar
+  // Botones "Agregar al carrito" en otras páginas
+  document.addEventListener('click', (e) => {
+    const add = e.target.closest('[data-add-to-cart]');
+    if (!add) return;
+
+    const item = {
+      id: add.dataset.id,
+      nombre: add.dataset.nombre,
+      precio: Number(add.dataset.precio || 0),
+      imagen: add.dataset.imagen || '',
+      qty: Number(add.dataset.qty || 1)
+    };
+
+    const cart = getCart();
+    const idx = cart.findIndex(x => String(x.id) === String(item.id));
+    if (idx >= 0) {
+      cart[idx].qty = Math.min(MAX_QTY, (cart[idx].qty || 1) + (item.qty || 1));
+    } else {
+      item.qty = Math.min(MAX_QTY, Math.max(1, item.qty || 1));
+      cart.push(item);
+    }
+    setCart(cart);
+    render();
+  });
+
   render();
-});
+})();
