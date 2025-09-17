@@ -1,0 +1,86 @@
+/* Tarjeta base */
+.noticia-card {
+  display: flex;
+  flex-direction: row-reverse; /* Imagen a la derecha en escritorio */
+  align-items: center;
+  max-width: 900px;
+  min-height: 200px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  /* Animación de entrada */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+
+  /* Transiciones generales */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.noticia-card .card-body {
+  flex: 1;
+  padding: 20px;
+}
+
+.noticia-img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.4s ease; /* Zoom imagen */
+  flex-shrink: 0;
+}
+
+/* Hover efectos */
+.noticia-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.noticia-card:hover .noticia-img {
+  transform: scale(1.05);
+}
+
+/* Botones */
+.noticia-card .btn {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.noticia-card .btn:hover {
+  background-color: #ff9800; /* Tono cálido */
+  transform: scale(1.05);
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Movil */
+@media (max-width: 768px) {
+  .noticia-card {
+    flex-direction: column; /* Imagen arriba */
+    max-width: 500px;
+    min-height: auto;
+  }
+
+  .noticia-img {
+    width: 100%;
+    max-height: 200px;
+    border-radius: 0;
+    height: auto;
+  }
+
+  .noticia-card .card-body {
+    text-align: center;
+    padding: 15px;
+  }
+
+  .noticia-card .card-body .btn {
+    margin-top: 15px;
+    
+  }
+}
