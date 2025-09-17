@@ -10,7 +10,7 @@ body::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(255, 255, 255, 0.782); /* Cambia el color y transparencia */
+  background-color: rgba(255, 255, 255, 0.897); /* Cambia el color y transparencia */
   z-index: -1; /* Se queda detrás del contenido */
 }
 
@@ -92,6 +92,7 @@ body::before {
   font-weight: 600;
   color: #198754; /* verde bootstrap */
 }
+
 
 
 /* Footer */

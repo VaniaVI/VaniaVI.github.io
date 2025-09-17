@@ -73,8 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
     productos.forEach(p => {
       const card = `
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card custom-card h-10">
-            <img src="${p.imagen}" class="card-img-top" alt="${p.nombre}">
+          <div class="card custom-card h-100">
+            <img src="${p.imagen}" class="card-img-top h-80" alt="${p.nombre}">
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">${p.nombre}</h5>
               <div class="mt-auto d-flex justify-content-between align-items-center">
