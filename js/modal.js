@@ -16,19 +16,19 @@ document.addEventListener("DOMContentLoaded", () => {
                   <label for="validationCustomEmail" class="form-label">Correo electrónico</label>
                   <div class="input-group has-validation">
                     <input type="email" class="form-control" id="validationCustomEmail" required
-                      pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
-                      title="Debe ser un correo válido con @"
-                      placeholder="phillips@gmail.com"/>
-                    <div class="invalid-feedback">Por favor ingrese su correo electrónico.</div>
+                      pattern="^[a-zA-Z0-9._%+-]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$"
+                      title="Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com"
+                      placeholder="phillips@duoc.cl"/>
+                    <div class="invalid-feedback">Por favor ingrese un correo válido con @duoc.cl, @profesor.duoc.cl o @gmail.com.</div>
                   </div>
                 </div>
                 <div class="w-100 mt-3">
                   <label for="validationCustomPassword" class="form-label">Contraseña</label>
                   <div class="input-group has-validation">
-                    <input type="password" class="form-control" id="validationCustomPassword" required minlength="8"
-                      title="Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo especial"
+                    <input type="password" class="form-control" id="validationCustomPassword" required minlength="4" maxlength="10"
+                      title="La contraseña debe tener entre 4 y 10 caracteres, una mayúscula, una minúscula, un número y un símbolo especial"
                       placeholder="contra123@" />
-                    <div class="invalid-feedback">Por favor ingresa tu contraseña.</div>
+                    <div class="invalid-feedback">Por favor ingresa tu contraseña (mínimo 4, máximo 10 caracteres).</div>
                   </div>
                 </div>
                 <div id="loginError" class="text-danger d-none">Usuario o contraseña incorrectos.</div>
