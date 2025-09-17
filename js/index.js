@@ -80,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="mt-auto d-flex justify-content-between align-items-center">
                 <span class="price">$${p.precio}</span>
                 <a href="detalleProducto.html" class="btn btn-sm btn-primary">Ver detalle</a>
-                
               </div>
             </div>
           </div>
