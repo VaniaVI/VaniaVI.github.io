@@ -12,16 +12,16 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="style.css" rel="stylesheet">
+    <link href="/styles/style.css" rel="stylesheet">
 </head>
 <body>
-   <header>
+  <header>
         <!-- Restored original two-row navbar structure with proper collapse functionality -->
         <nav class="navbar navbar-expand-xl navbar-light bg-light custom-navbar" style="font-family: 'Fredoka', sans-serif; font-weight: 400;">
             <div class="container flex-column">
                 <!-- PRIMERA FILA: menú + carrito -->
                 <div class="d-flex w-100 justify-content-between align-items-center">
-                    <a class="navbar-brand" href="#" style="font-family: 'Fredoka', sans-serif; font-weight: 600;">PetSocity</a>
+                    <a class="navbar-brand" href="/index.html" style="font-family: 'Fredoka', sans-serif; font-weight: 600;">PetSocity</a>
                     <button
                         class="navbar-toggler"
                         type="button"
@@ -41,26 +41,31 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a
-                                    class="nav-link dropdown-toggle"
-                                    href="/productos.html"
-                                    id="navbarDropdown"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >Productos</a>
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                >
+                                Productos
+                                </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><hr class="dropdown-divider" /></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=todos">Ver todos los productos</a></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=accesorios">Accesorios</a></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=alimentos">Alimentos</a></li>
+                                  <li><hr class="dropdown-divider" /></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=ofertas especiales">Ofertas especiales</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Nosotros</a>
+                                <a class="nav-link" href="/nosotros.html">Nosotros</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Contacto</a>
+                                <a class="nav-link" href="/blogs.html">Blogs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contacto.html">Contacto</a>
                             </li>
                             
                             <!-- Added cart and login buttons inside collapse for mobile -->
@@ -71,7 +76,7 @@
                                         <span class="material-symbols-outlined">add_shopping_cart</span>
                                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
                                     </div>
-                                    <a class="nav-link" href="#">Cesta</a>
+                                    <a class="nav-link" href="/carritoCompra.html">Carrito</a>
                                 </div>
                             </li>
                             
@@ -110,7 +115,7 @@
                       
                         <!-- Enlace a la cesta -->
                         <li class="nav-item list-unstyled">
-                            <a class="nav-link" href="#">Cesta</a>
+                            <a class="nav-link" href="#">Carrito</a>
                         </li>
                         </div>
                     </div>
@@ -175,6 +180,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
-    <script src="/index.js"></script>
+    <script src="/js/productos.js"></script>
 </body>
 </html>
