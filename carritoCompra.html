@@ -12,77 +12,118 @@
 <body>
 
   <!-- ====================== HEADER ====================== -->
-  <header>
-    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top custom-navbar" style="font-family: 'Fredoka', sans-serif; font-weight: 400;">
-      <div class="container flex-column">
+  <!--  Header / NAVBAR -->
+    <header>
+        <!-- Restored original two-row navbar structure with proper collapse functionality -->
+        <nav class="navbar navbar-expand-xl navbar-light bg-light custom-navbar" style="font-family: 'Fredoka', sans-serif; font-weight: 400;">
+            <div class="container flex-column">
+                <!-- PRIMERA FILA: menú + carrito -->
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                      <img src="./logoPetsocity.png" alt="Logo Petsocity" height="80">
+                      <span style="font-family: 'Fredoka', sans-serif; font-weight: 600;">Petsocity</span>
+                    </a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-        <!-- Fila 1: marca + menú + acceso al carrito -->
-        <div class="d-flex w-100 justify-content-between align-items-center">
-          <a class="navbar-brand" href="./index.html" style="font-family: 'Fredoka', sans-serif; font-weight: 600;">
-            PetSocity
-          </a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/index.html">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                >
+                                Productos
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=todos">Ver todos los productos</a></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=accesorios">Accesorios</a></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=alimentos">Alimentos</a></li>
+                                  <li><hr class="dropdown-divider" /></li>
+                                  <li><a class="dropdown-item" href="/productos.html?categoria=ofertas">Ofertas especiales</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/nosotros.html">Nosotros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/blogs.html">Blogs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contacto.html">Contacto</a>
+                            </li>
+                            
+                            <!-- Added cart and login buttons inside collapse for mobile -->
+                            <!-- Cesta - Mobile -->
+                            <li class="nav-item d-xl-none">
+                                <div class="d-flex align-items-center">
+                                    <div class="position-relative d-inline-block me-3">
+                                        <span class="material-symbols-outlined">add_shopping_cart</span>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                                    </div>
+                                    <a class="nav-link" href="/carritoCompra.html">Carrito</a>
+                                </div>
+                            </li>
+                            
+                            <!-- Login/Register - Mobile -->
+                            <li class="nav-item d-xl-none">
+                                <div class="d-flex flex-column gap-2 mt-2">
+                                    <button
+                                        type="button"
+                                        class="btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                        <span class="material-symbols-outlined">account_circle</span>
+                                    </button>
+                                </div>
+                            </li>
+                        </ul>
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir menú">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <!-- Menú principal -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="./productos.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="./productos.html#alimento">Alimento</a></li>
-                  <li><a class="dropdown-item" href="./productos.html#accesorios">Accesorios</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li><a class="dropdown-item" href="./productos.html#ofertas">Ofertas</a></li>
-                </ul>
-              </li>
-
-              <li class="nav-item"><a class="nav-link" href="./nosotros.html">Nosotros</a></li>
-              <li class="nav-item"><a class="nav-link" href="./blogs.html">Blogs</a></li>
-              <li class="nav-item"><a class="nav-link" href="./paginaContacto.html">Contacto</a></li>
-
-              <!-- Carrito en móvil dentro del menú colapsado -->
-              <li class="nav-item d-xl-none">
-                <div class="d-flex align-items-center">
-                  <span class="material-icons me-2">shopping_cart</span>
-                  <a class="nav-link p-0" href="./carritoCompra.html">Cesta</a>
+                        <!-- Cesta - Desktop -->
+                        <div class="d-none d-xl-flex align-items-center pe-5">
+                        <!-- Cesta + Login - Desktop -->
+                        <div class="d-none d-xl-flex align-items-center gap-3 pe-5">
+                        <!-- Botón de inicio de sesión -->
+                            <button
+                            type="button"
+                            class="btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            <span class="material-symbols-outlined">account_circle</span>
+                            </button>
+                      
+                        <!-- Ícono del carrito -->
+                            <div class="position-relative d-inline-block">
+                            <span class="material-symbols-outlined">add_shopping_cart</span>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                            </div>
+                      
+                        <!-- Enlace a la cesta -->
+                        <li class="nav-item list-unstyled">
+                            <a class="nav-link" href="#">Carrito</a>
+                        </li>
+                        </div>
+                    </div>
                 </div>
-              </li>
-
-              <!-- Login/registro en móvil -->
-              <li class="nav-item d-xl-none">
-                <div class="d-flex flex-column gap-2 mt-2">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Iniciar sesión</button>
-                  <a class="btn btn-light border" href="./registroUsuario.html" role="button">Registrarse</a>
-                </div>
-              </li>
-            </ul>
-
-            <!-- Carrito en escritorio (a la derecha, sin <li> suelto) -->
-            <div class="d-none d-xl-flex align-items-center pe-5">
-              <span class="material-icons me-2">shopping_cart</span>
-              <a class="nav-link p-0" href="./carritoCompra.html">Carrito</a>
             </div>
-          </div>
-        </div>
-
-        <!-- Fila 2 (solo escritorio): logo centrado + sesión -->
-        <div class="d-none d-xl-flex w-100 justify-content-center mt-2">
-          <!-- Tu ruta/imagen del logo la manejas tú -->
-          <img src="./logoPetsocity.png" alt="PetSocity" class="site-logo" width="50" height="50">
-        </div>
-        <div id="loginRegistro" class="d-none d-xl-flex w-100 justify-content-end gap-3 mt-2">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Iniciar sesión</button>
-          <a class="btn btn-light border" href="./registroUsuario.html" role="button">Registrarse</a>
-        </div>
-      </div>
-    </nav>
-  </header>
+        </nav>
+    </header>
   <!-- ==================== /HEADER ==================== -->
 
   <!-- ==================== CONTENIDO ==================== -->
