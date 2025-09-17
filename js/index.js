@@ -1,4 +1,9 @@
 import { productos } from "./productos.js";
+
+//cambiar formato de precio
+const fmtCLP = (n) => (n ?? 0).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
+
+
 // 👉 Contenedor donde van las cards
 const container = document.getElementById("productTrendContainer");
     
@@ -16,7 +21,7 @@ if (productosTendencias.length === 0) {
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">${p.nombre}</h5>
             <div class="mt-auto d-flex justify-content-between align-items-center">
-              <span class="price">$${p.precio}</span>
+              <span class="price">${fmtCLP(p.precio)}</span>
                <a href="detalleProducto.html?prodid=${p.id}&cat=${p.categoria}" class="btn btn-sm btn-primary">Ver detalle</a>
             </div>
           </div>

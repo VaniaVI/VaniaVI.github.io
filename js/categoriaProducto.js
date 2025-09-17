@@ -1,6 +1,10 @@
 import { productos } from "./productos.js";
 const container = document.getElementById("productContainer");
 
+//cambiar formato de precio
+const fmtCLP = (n) => (n ?? 0).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
+
+
 // 👉 Leer parámetro de la URL
 const params = new URLSearchParams(window.location.search);
 const categoria = params.get("categoria") || "todos";
@@ -23,7 +27,7 @@ productosFiltrados.forEach(p => {
             <div class="card-body d-flex flex-column">
               <h5 class="card-title ">${p.nombre}</h5>
               <div class="mt-auto d-flex justify-content-between align-items-center">
-                <span class="price">$${p.precio}</span>
+                <span class="price">${fmtCLP(p.precio)}</span>
                 <a href="detalleProducto.html?prodid=${p.id}&cat=${p.categoria}" class="btn btn-sm btn-primary">Ver detalle</a>
               </div>
             </div>

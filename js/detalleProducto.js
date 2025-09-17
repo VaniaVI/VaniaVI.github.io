@@ -6,6 +6,9 @@ const categoria = params.get("cat");
 // Importar productos desde otro archivo
 import { productos } from "./productos.js";
 
+//cambiar formato de precio
+const fmtCLP = (n) => (n ?? 0).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
+
 // Buscar y mostrar el producto
 function mostrarProducto(id, categoria) {
   const producto = productos.find(p => p.id === Number(id));
@@ -17,11 +20,42 @@ function mostrarProducto(id, categoria) {
 
   // Mostrar datos del producto
   document.getElementById("tituloProducto").textContent = producto.nombre;
-  document.getElementById("precioProducto").textContent = `$${producto.precio}`;
+  document.getElementById("precioProducto").textContent = fmtCLP(producto.precio);
   document.getElementById("descripcionProducto").textContent = producto.descripcion;
   document.getElementById("imagenPrincipal").src = producto.imagen;
   document.getElementById("categoriaProducto").textContent = categoria || "Sin categoría";
   document.getElementById("tituloProductoBreadcrumb").textContent = producto.nombre || "Producto";
+
+
+  //Agregar productos al carrito
+  document.getElementById("btnAgregar").addEventListener("click", () => {
+  const cantidad = Math.min(10, Math.max(1, Number(document.getElementById("cantidad").value)));
+  const producto = productos.find(p => p.id === Number(id));
+
+  if (!producto) return;
+
+  const item = {
+    id: producto.id,
+    nombre: producto.nombre,
+    precio: Number(producto.precio),
+    imagen: producto.imagen,
+    cant: cantidad
+  };
+
+  const STORAGE_KEY = 'carritoItems';
+  const cart = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  const idx = cart.findIndex(x => String(x.id) === String(item.id));
+
+  if (idx >= 0) {
+    cart[idx].cant = Math.min(10, cart[idx].cant + item.cant);
+  } else {
+    cart.push(item);
+  }
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+  alert(`Se agregó ${item.cant} unidad(es) de "${item.nombre}" al carrito`);
+});
+
 
   // Mostrar productos relacionados
   mostrarRelacionados(producto, categoria);
@@ -49,7 +83,7 @@ function mostrarRelacionados(productoActual, categoria) {
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">${p.nombre}</h5>
           <div class="mt-auto d-flex justify-content-between align-items-center">
-            <span class="price">$${p.precio}</span>
+            <span class="price">${fmtCLP(p.precio)}</span>
             <a href="/detalleProducto.html?prodid=${p.id}&cat=${p.categoria}" class="btn btn-sm btn-primary">Ver detalle</a>
           </div>
         </div>
