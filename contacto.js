@@ -1,77 +1,62 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const dominiosPermitidos = ["duoc.cl", "profesor.duoc.cl", "gmail.com"];
+// Validación alineada a la pauta
+// Nombre: requerido, max 100
+// Email: requerido, max 100 y solo dominios duoc.cl, profesor.duoc.cl, gmail.com
+// Mensaje: requerido, max 500
 
-  const f = document.querySelector("#f");
-  const nombre = document.querySelector("#nombre");
-  const correo = document.querySelector("#correo");
-  const comentario = document.querySelector("#comentario");
-  const errNombre = document.querySelector("#err-nombre");
-  const errCorreo = document.querySelector("#err-correo");
-  const errComentario = document.querySelector("#err-comentario");
-  const ok = document.querySelector("#ok");
+(() => {
+  const form   = document.getElementById('contactoForm');
+  const alerta = document.getElementById('alertaForm');
+  const chk    = document.getElementById('acepto');
+  const chkFb  = document.getElementById('aceptoFeedback');
+  if (!form) return;
 
-  const cntNombre = document.querySelector("#cnt-nombre");
-  const cntCorreo = document.querySelector("#cnt-correo");
-  const cntComentario = document.querySelector("#cnt-comentario");
+  const MAX_NOMBRE  = 100;
+  const MAX_EMAIL   = 100;
+  const MAX_MENSAJE = 500;
+  const dominiosOK  = /@(?:duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i;
 
-  function esEmailValidoDominio(email){
-    const m = String(email).toLowerCase().match(/^[^\s@]+@([^\s@]+\.[^\s@]+)$/);
-    if(!m) return false;
-    const dominio = m[1];
-    return dominiosPermitidos.some(d => dominio.endsWith(d));
+  function showAlert(text, type) {
+    alerta.className = `alert alert-${type}`;
+    alerta.textContent = text;
+    alerta.classList.remove('d-none');
   }
 
-  function validar({ nombre, correo, comentario }){
-    const e = {};
-    if(!nombre?.trim()) e.nombre = "Nombre requerido";
-    else if(nombre.length > 100) e.nombre = "Máx 100 caracteres";
-
-    if(correo){
-      if(correo.length > 100) e.correo = "Máx 100 caracteres";
-      else if(!esEmailValidoDominio(correo)) e.correo = "Dominio no permitido";
-    }
-
-    if(!comentario?.trim()) e.comentario = "Comentario requerido";
-    else if(comentario.length > 500) e.comentario = "Máx 500 caracteres";
-
-    return e;
+  function clampLen(val, max) {
+    return (val || '').slice(0, max);
   }
 
-  function pintarErrores(e){
-    errNombre.textContent = e.nombre || "";
-    errCorreo.textContent = e.correo || "";
-    errComentario.textContent = e.comentario || "";
-
-    nombre.classList.toggle("is-invalid", !!e.nombre);
-    correo.classList.toggle("is-invalid", !!e.correo);
-    comentario.classList.toggle("is-invalid", !!e.comentario);
-  }
-
-  function updateCounts(){
-    cntNombre.textContent = `${nombre.value.length}/100`;
-    cntCorreo.textContent = `${correo.value.length}/100`;
-    cntComentario.textContent = `${comentario.value.length}/500`;
-  }
-
-  [nombre, correo, comentario].forEach(input=>{
-    input.addEventListener("input", ()=>{
-      updateCounts();
-      const errs = validar({ nombre:nombre.value, correo:correo.value, comentario:comentario.value });
-      pintarErrores(errs);
-    });
-  });
-  updateCounts();
-
-  f.addEventListener("submit", (e)=>{
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const datos = { nombre:nombre.value, correo:correo.value, comentario:comentario.value };
-    const errs = validar(datos);
-    pintarErrores(errs);
-    if(Object.keys(errs).length === 0){
-      f.reset();
-      updateCounts();
-      ok.textContent = "¡Mensaje enviado!";
-      setTimeout(()=> ok.textContent = "", 2500);
+
+    const fd      = new FormData(form);
+    let   nombre  = (fd.get('nombre') || '').trim();
+    let   email   = (fd.get('email')  || '').trim();
+    let   asunto  = (fd.get('asunto') || '').trim();
+    let   mensaje = (fd.get('mensaje')|| '').trim();
+
+    if (!form.checkValidity() || !chk.checked) {
+      form.classList.add('was-validated');
+      if (chkFb) chkFb.style.display = chk.checked ? 'none' : 'block';
+      showAlert('Por favor, corrige los campos marcados.', 'warning');
+      return;
     }
+
+    // Longitudes máximas de nombre, mensaje e email
+    if (nombre.length > MAX_NOMBRE)  nombre  = clampLen(nombre, MAX_NOMBRE);
+    if (email.length  > MAX_EMAIL)   email   = clampLen(email, MAX_EMAIL);
+    if (mensaje.length> MAX_MENSAJE) mensaje = clampLen(mensaje, MAX_MENSAJE);
+
+    // Dominio permitido
+    if (!dominiosOK.test(email)) {
+      showAlert('El correo debe ser @duoc.cl, @profesor.duoc.cl o @gmail.com', 'warning');
+      return;
+    }
+
+    const href = `mailto:soporte@proyecto.cl?subject=${encodeURIComponent(asunto)}%20-%20${encodeURIComponent(nombre)}&body=${encodeURIComponent(mensaje)}%0A%0AContacto:%20${encodeURIComponent(email)}`;
+    window.location.href = href;
+
+    showAlert('¡Gracias! Abrimos tu correo para enviar el mensaje.', 'success');
+    form.reset();
+    form.classList.remove('was-validated');
   });
-});
+})();
