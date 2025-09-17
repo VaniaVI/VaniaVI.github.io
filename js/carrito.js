@@ -4,7 +4,7 @@
 
 (() => {
   const DEFAULT_KEY = 'carritoItems';
-  const MAX_QTY     = 10;
+  const MAX_CANT     = 10;
 
   // Intento respetar una clave previa si ya existía algo que contenga "carrito"
   function detectKey() {
@@ -13,7 +13,7 @@
   }
   let STORAGE_KEY = detectKey();
 
-  // Utilidades
+  // Utilidades cambiar formato de precio
   const $  = (sel, ctx=document) => ctx.querySelector(sel);
   const fmtCLP = (n) => (n ?? 0).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
 
@@ -42,18 +42,18 @@
     return 0; // retiro
   }
 
-  function qtyButtons(id, qty) {
+  function cantButtons(id, cant) {
     return `
       <div class="btn-group" role="group">
         <button class="btn btn-sm btn-outline-secondary" data-action="dec" data-id="${id}">−</button>
-        <button class="btn btn-sm btn-light disabled">${qty}</button>
+        <button class="btn btn-sm btn-light disabled">${cant}</button>
         <button class="btn btn-sm btn-outline-secondary" data-action="inc" data-id="${id}">+</button>
       </div>`;
   }
 
   function updateBadge() {
     if (!BADGE) return;
-    const totalItems = getCart().reduce((acc, it) => acc + (it.qty || 0), 0);
+    const totalItems = getCart().reduce((acc, it) => acc + (it.cant || 0), 0);
     BADGE.textContent = totalItems;
   }
 
@@ -63,9 +63,9 @@
     let subtotal = 0;
 
     for (const it of items) {
-      const qty = Math.min(Math.max(it.qty || 1, 1), MAX_QTY);
-      const price = Number(it.precio || 0);
-      const st = price * qty;
+      const cant = Math.min(Math.max(it.cant || 1, 1), MAX_CANT);
+      const price = it.precio || 0;
+      const st = price * cant;
       subtotal += st;
 
       html += `
@@ -79,7 +79,7 @@
               </div>
             </div>
           </td>
-          <td class="text-center">${qtyButtons(it.id, qty)}</td>
+          <td class="text-center">${cantButtons(it.id, cant)}</td>
           <td class="text-end">${fmtCLP(price)}</td>
           <td class="text-end">${fmtCLP(st)}</td>
           <td class="text-center">
@@ -113,8 +113,8 @@
     const idx = cart.findIndex(x => String(x.id) === String(id));
     if (idx === -1) return;
 
-    if (action === 'inc') cart[idx].qty = Math.min(MAX_QTY, (cart[idx].qty || 1) + 1);
-    if (action === 'dec') cart[idx].qty = Math.max(1, (cart[idx].qty || 1) - 1);
+    if (action === 'inc') cart[idx].cant = Math.min(MAX_CANT, (cart[idx].cant || 1) + 1);
+    if (action === 'dec') cart[idx].qtcant = Math.max(1, (cart[idx].cant || 1) - 1);
     if (action === 'del') cart.splice(idx, 1);
 
     setCart(cart);
@@ -141,17 +141,17 @@
     const item = {
       id: add.dataset.id,
       nombre: add.dataset.nombre,
-      precio: Number(add.dataset.precio || 0),
+      precio: add.dataset.precio || 0,
       imagen: add.dataset.imagen || '',
-      qty: Number(add.dataset.qty || 1)
+      cant: Number(add.dataset.cant || 1)
     };
 
     const cart = getCart();
     const idx = cart.findIndex(x => String(x.id) === String(item.id));
     if (idx >= 0) {
-      cart[idx].qty = Math.min(MAX_QTY, (cart[idx].qty || 1) + (item.qty || 1));
+      cart[idx].cant = Math.min(MAX_CANT, (cart[idx].cant || 1) + (item.cant || 1));
     } else {
-      item.qty = Math.min(MAX_QTY, Math.max(1, item.qty || 1));
+      item.cant = Math.min(MAX_CANT, Math.max(1, item.cant || 1));
       cart.push(item);
     }
     setCart(cart);

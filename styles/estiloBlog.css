@@ -1,20 +1,45 @@
+
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.897);
+  z-index: -1;
+}
+.blog-page {
+  background-image: url('https://i.pinimg.com/736x/a6/13/8b/a6138b7c5c88329582abb3567a5df1c1.jpg');
+  background-size: 600px; /* Tamaño realista para patrón */
+  background-repeat: repeat;
+  background-position: top center;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 0;
+}
+
+.blog-page::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.85);
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* Tarjeta base */
 .noticia-card {
   display: flex;
-  flex-direction: row-reverse; /* Imagen a la derecha en escritorio */
+  flex-direction: row-reverse;
   align-items: center;
   max-width: 900px;
   min-height: 200px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
-  /* Animación de entrada */
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.6s ease forwards;
-
-  /* Transiciones generales */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -27,11 +52,10 @@
   width: 250px;
   height: 200px;
   object-fit: cover;
-  transition: transform 0.4s ease; /* Zoom imagen */
+  transition: transform 0.4s ease;
   flex-shrink: 0;
 }
 
-/* Hover efectos */
 .noticia-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -41,17 +65,15 @@
   transform: scale(1.05);
 }
 
-/* Botones */
 .noticia-card .btn {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .noticia-card .btn:hover {
-  background-color: #ff9800; /* Tono cálido */
+  background-color: #ff9800;
   transform: scale(1.05);
 }
 
-/* Animaciones */
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -59,10 +81,10 @@
   }
 }
 
-/* Movil */
+/* Responsive */
 @media (max-width: 768px) {
   .noticia-card {
-    flex-direction: column; /* Imagen arriba */
+    flex-direction: column;
     max-width: 500px;
     min-height: auto;
   }
@@ -70,7 +92,6 @@
   .noticia-img {
     width: 100%;
     max-height: 200px;
-    border-radius: 0;
     height: auto;
   }
 
@@ -81,6 +102,5 @@
 
   .noticia-card .card-body .btn {
     margin-top: 15px;
-    
   }
 }
