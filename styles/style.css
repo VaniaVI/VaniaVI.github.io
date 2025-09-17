@@ -47,7 +47,7 @@ body::before {
   padding: 30px;
 }
 
-.ver-productos > button {
+.ver-productos > .btn-suscribir{
   display: flex;
   align-items: center;
   padding: 0.70rem 1.2rem;
@@ -59,9 +59,10 @@ body::before {
   font-size: 1.2rem;
   border: none;
   transition: all 0.5s ease;
+  text-decoration: none;
 }
 
-.ver-productos > button:hover{
+.ver-productos > .btn-suscribir:hover{
   transform:scale(1.1);
 }
 
