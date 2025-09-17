@@ -13,20 +13,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/styles/style.css" rel="stylesheet">
+    <!-- Favicon -->
+     <link rel="shortcut icon" href="./image/logoPetsocity.png" type="image/x-icon">
 </head>
 <body>
-
-  <!--  Header / NAVBAR -->
     <header>
         <!-- Restored original two-row navbar structure with proper collapse functionality -->
         <nav class="navbar navbar-expand-xl navbar-light bg-light custom-navbar" style="font-family: 'Fredoka', sans-serif; font-weight: 400;">
             <div class="container flex-column">
                 <!-- PRIMERA FILA: menú + carrito -->
                 <div class="d-flex w-100 justify-content-between align-items-center">
-                    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                      <img src="./image/logoPetsocity.png" alt="Logo Petsocity" height="80">
-                      <span style="font-family: 'Fredoka', sans-serif; font-weight: 600;">Petsocity</span>
-                    </a>
+                    <img src="./image/logoPetsocity.png" alt="Logo Petsocity" height="60">
+                    <a class="navbar-brand" href="/index.html" style="font-family: 'Fredoka', sans-serif; font-weight: 600;">PetSocity</a>
                     <button
                         class="navbar-toggler"
                         type="button"
@@ -70,7 +68,7 @@
                                 <a class="nav-link" href="/blogs.html">Blogs</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/contacto.html">Contacto</a>
+                                <a class="nav-link" href="/paginaContacto.html">Contacto</a>
                             </li>
                             
                             <!-- Added cart and login buttons inside collapse for mobile -->
@@ -120,7 +118,7 @@
                       
                         <!-- Enlace a la cesta -->
                         <li class="nav-item list-unstyled">
-                            <a class="nav-link" href="#">Carrito</a>
+                            <a class="nav-link" href="/carritoCompra.html">Carrito</a>
                         </li>
                         </div>
                     </div>
@@ -209,7 +207,7 @@
     </div>
   </main>
 
-  <!-- Footer -->
+    <!-- Inicio de footer -->
     <footer class="bg-white text-black pt-5 pb-4 text-center p-2 mt-3 border-top border-[#f8f9fa]">
         <div class="container text-md-start">
             <div class="row">
@@ -225,11 +223,10 @@
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold">Links</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-black text-decoration-none">Home</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Productos</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Nosotros</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Blogs</a></li>
-                        <li><a href="#" class="text-black text-decoration-none">Contacto</a></li>
+                        <li><a href="/productos.html" class="text-black text-decoration-none">Productos</a></li>
+                        <li><a href="/nosotros.html" class="text-black text-decoration-none">Nosotros</a></li>
+                        <li><a href="/blogs.html" class="text-black text-decoration-none">Blogs</a></li>
+                        <li><a href="/paginaContacto.html" class="text-black text-decoration-none">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
@@ -259,7 +256,9 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Validación del formulario (tu contacto.js) -->
-  <script defer src="./contacto.js"></script>
+  <!-- Validación del formulario -->
+  <script defer src="./js/contacto.js"></script>
+  <!-- Lógica de inicio sesión -->
+  <script defer src="./js/modal.js"></script>
 </body>
 </html>
