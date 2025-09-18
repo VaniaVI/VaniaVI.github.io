@@ -17,6 +17,16 @@ function setActiveItem(clickedItem) {
     }
 }
 
+//Cerrar la sesion
+function setCloseSesion(clickedItem) {
+    //Se limpia el cache del usuario
+    localStorage.clear();
+
+    // Redirige al index.html
+    window.location.href = "index.html";
+}
+
+
 // Función para actualizar el contenido principal
 function updateMainContent(section) {
     const welcomeMessage = document.querySelector('.welcome-message');
