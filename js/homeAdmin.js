@@ -1,3 +1,10 @@
+const usuario = localStorage.getItem("usuarioActivo");
+if (usuario !== "admin@gmail.com") {
+  alert("Acceso denegado. Solo el administrador puede ver esta sección.");
+  window.location.href = "/index.html";
+}
+
+
 // Función para establecer el elemento activo en el menú
 function setActiveItem(clickedItem) {
     // Remover la clase active de todos los elementos

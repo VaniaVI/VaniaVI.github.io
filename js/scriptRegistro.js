@@ -9,6 +9,9 @@
 
   let contadorMascotas = 0;
 
+
+
+
   // Añadir nueva mascota desde plantilla HTML
   if (agregarBtn && mascotasContainer && plantilla) {
     agregarBtn.addEventListener('click', () => {
@@ -53,7 +56,7 @@
       const confirmPassword = confirmInput.value.trim();
 
       // Validación de seguridad
-      const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&!^*])[A-Za-z\d@#$%&!^*]{8,}$/;
+      const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&!^*.])[A-Za-z\d@#$%&!^*.]{8,}$/;
 
       if (!regex.test(password)) {
         passwordInput.setCustomValidity("La contraseña no cumple con los requisitos");

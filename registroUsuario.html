@@ -141,7 +141,7 @@
                     <form class="needs-validation" novalidate>
                         <!-- Nombre completo -->
                         <div class="mb-3">
-                            <label for="nombreCompleto" class="form-label">Nombre completo</label>
+                            <label for="nombreCompleto" id="nombreCompleto" class="form-label">Nombre completo</label>
                             <input type="text" class="form-control" id="nombreCompleto" required maxlength="50"
                                 pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios hasta 50 caracteres">
                             <div class="invalid-feedback mt-1">Ingresa tu nombre completo</div>
@@ -168,16 +168,18 @@
                         <!-- Contraseña -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" required minlength="8"
-                                title="Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo especial">
+                            <input type="password" class="form-control" id="password" required minlength="4"
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&!^*.]).{8,}$"
+                                title="Debe tener al menos 4 caracteres, una mayúscula, una minúscula, un número y un símbolo especial">
                             <div class="invalid-feedback mt-1">Ingrese contraseña segura</div>
                         </div>
 
                         <!-- Confirmar contraseña -->
                         <div class="mb-3">
                             <label for="verificarPassword" class="form-label">Confirmar contraseña</label>
-                            <input type="password" class="form-control" id="verificarPassword" required minlength="8"
-                                title="Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo especial">
+                            <input type="password" class="form-control" id="verificarPassword" required minlength="4"
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&!^*.]).{8,}$"
+                                title="Debe tener al menos 4 caracteres, una mayúscula, una minúscula, un número y un símbolo especial">
                             <div class="invalid-feedback mt-1">Ingrese contraseña segura</div>
                         </div>
 
@@ -226,7 +228,7 @@
                             </div>
 
                             <!-- Botón de registro -->
-                            <div class="text-center mt-4">
+                            <div id="formRegistro" class="text-center mt-4">
                                 <button type="submit" class="btn btn-primary btn-final">Registrar</button>
                             </div>
                     </form>
@@ -282,6 +284,7 @@
     <!-- INICIO SESION -->
     <script src="/js/modal.js"></script>
     <script type="module" src="/js/carrito.js"></script>
+    <script type="module" src="/js/index.js"></script>
 </body>
 
 </html>

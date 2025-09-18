@@ -31,3 +31,5 @@ if (productosTendencias.length === 0) {
     container.innerHTML += card;
   });
 }
+
+

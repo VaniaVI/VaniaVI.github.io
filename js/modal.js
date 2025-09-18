@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-              <form class="needs-validation d-flex flex-column gap-3" >
+              <form id="formLogin" class="needs-validation d-flex flex-column gap-3" >
                 <div class="w-100">
                   <label for="validationCustomEmail" class="form-label">Correo electrónico</label>
                   <div class="input-group has-validation">
@@ -54,3 +54,26 @@ document.addEventListener("DOMContentLoaded", () => {
     `);
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const formLogin = document.getElementById("formLogin");
+
+  if (formLogin) {
+    formLogin.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const correo = document.getElementById("validationCustomEmail").value.trim();
+
+      // Simulación de login válido
+      if (correo === "admin@gmail.com") {
+        localStorage.setItem("usuarioActivo", correo);
+        window.location.href = "/homeAdmin.html";
+      } else {
+        localStorage.setItem("usuarioActivo", correo);
+        window.location.href = "/index.html";
+      }
+    });
+  }
+});
+
+
