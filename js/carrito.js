@@ -2,7 +2,6 @@
 // Cantidad mínima 1, máxima 10 por producto
 // Soporta botones en otras páginas (productos/detalle)
 
-(() => {
   const DEFAULT_KEY = 'carritoItems';
   const MAX_CANT     = 10;
 
