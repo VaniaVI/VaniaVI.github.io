@@ -16,7 +16,7 @@
   const $  = (sel, ctx=document) => ctx.querySelector(sel); // Equivalente a ejemplo: document.querySelector("#miElemento")
   const fmtCLP = (n) => (n ?? 0).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }); // Cambio de formato de precio a CLP sin decimales
 
-  // DOM
+  // Elementos del carrito en HTML
   const tbody       = $('#carritoBody');
   const resSubtotal = $('#resSubtotal');
   const resEnvio    = $('#resEnvio');
