@@ -36,7 +36,7 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); // Si no lo hicieras, el carrito se perdería al recargar o quedaría guardado en un formato que no puedes trabajar.
   }
 
-  // Logia de envio
+  // Logica de envio
   function envioPrecio() {
     const v = metodoEnvio?.value;
     if (v === 'normal')  return 3990;
