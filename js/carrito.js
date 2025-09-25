@@ -5,7 +5,7 @@
   const DEFAULT_KEY = 'carritoItems';
   const MAX_CANT     = 10;
 
-  // Intento respetar una clave previa si ya existía algo que contenga "carrito"
+  // Respeta una clave previa si ya existía algo que contenga "carrito"
   function detectKey() {
     const keys = Object.keys(localStorage);
     return keys.find(k => /carrito/i.test(k)) || DEFAULT_KEY;
