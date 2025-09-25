@@ -124,19 +124,19 @@ function updateBadge() {
     const idx = cart.findIndex(x => String(x.id) === String(id));
     if (idx === -1) return; // No encontrado (nada que hacer)
 
-    if (action === 'inc') cart[idx].cant = Math.min(MAX_CANT, (cart[idx].cant || 1) + 1);
-    if (action === 'dec') cart[idx].qtcant = Math.max(1, (cart[idx].cant || 1) - 1);
-    if (action === 'del') cart.splice(idx, 1);
+    if (action === 'inc') cart[idx].cant = Math.min(MAX_CANT, (cart[idx].cant || 1) + 1); // Validación de cantidad maxima 10
+    if (action === 'dec') cart[idx].qtcant = Math.max(1, (cart[idx].cant || 1) - 1); // Validación de cantidad minima 1
+    if (action === 'del') cart.splice(idx, 1); // Si por alguna razón el carrito trae un número inválido (ej: 0 o 50), lo corrige automáticamente al mostrarlo, siempre queda entre 1 y 10.
 
     setCart(cart);
     render(); // Repintamos la UI y totales
 
-  // Cambio de método de envío → recalcula totales
+  // Cambio de método de envío / recalcula los totales
   metodoEnvio && metodoEnvio.addEventListener('change', render);
 
   // BOTON Vaciar carrito con confirmación
   BTN_CLEAR && BTN_CLEAR.addEventListener('click', () => {
-    if (!confirm('¿Vaciar carrito?')) return;
+    if (!confirm('¿Vaciar carrito?')) return; // Validación y confirmación de vaciar carrito 
     setCart([]);
     render();
   });
