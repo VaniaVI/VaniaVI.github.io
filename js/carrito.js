@@ -1,51 +1,63 @@
-// Carrito — LocalStorage + reglas
-// Cantidad mínima 1, máxima 10 por producto
-// Soporta botones en otras páginas (productos/detalle)
+// ======================================
+// Carrito de compras con LocalStorage
+// Reglas: mínimo 1 y máximo 10 por producto
+// Se puede agregar desde distintas páginas
+// ======================================
 
-  const DEFAULT_KEY = 'carritoItems';
-  const MAX_CANT     = 10;
+(() => {
+  // Configuración general
+  const CLAVE_POR_DEFECTO = 'carritoItems'; // Nombre por defecto en LocalStorage
+  const MAXIMO_CANTIDAD   = 10;             // Cantidad máxima permitida por producto
 
-  // Respeta una clave previa si ya existía algo que contenga "carrito"
-  function detectKey() {
-    const keys = Object.keys(localStorage);
-    return keys.find(k => /carrito/i.test(k)) || DEFAULT_KEY;
+  // Buscar si ya existe una clave de carrito en el navegador,
+  // si no, usar la clave por defecto
+  function encontrarClaveCarrito() {
+    const claves = Object.keys(localStorage);
+    return claves.find(k => /carrito/i.test(k)) || CLAVE_POR_DEFECTO;
   }
-  let STORAGE_KEY = detectKey();
+  let claveCarrito = encontrarClaveCarrito();
 
-  // Utilidades
-  const $  = (sel, ctx=document) => ctx.querySelector(sel); // Equivalente a ejemplo: document.querySelector("#miElemento")
-  const fmtCLP = (n) => (n ?? 0).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }); // Cambio de formato de precio a CLP sin decimales
+  // Funciones de ayuda
+  // Atajo para buscar elementos en el HTML
+  const seleccionar = (sel, ctx = document) => ctx.querySelector(sel);
 
-  // Elementos del carrito en HTML
-  const tbody       = $('#carritoBody');
-  const resSubtotal = $('#resSubtotal');
-  const resEnvio    = $('#resEnvio');
-  const resTotal    = $('#resTotal');
-  const metodoEnvio = $('#metodoEnvio');
-  const BTN_CLEAR   = $('#btnVaciar');
-  const BTN_PAGAR   = $('#btnPagar');
-  const BADGE       = $('#badgeCarrito');
+  // Dar formato a los números en pesos chilenos
+  const formatearCLP = (n) =>
+    (Number(n) || 0).toLocaleString('es-CL', {
+      style: 'currency', currency: 'CLP', maximumFractionDigits: 0
+    });
 
-  // Estado en el localStorage
-  function getCart() {
-    // Lee el carrito guardado y devuelve nada si no hay nada o si algo falló
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; }
+  // Elementos del carrito en el HTML
+  const cuerpoTablaCarrito   = seleccionar('#carritoBody');   // Tabla donde se dibujan los productos
+  const subtotalElemento     = seleccionar('#resSubtotal');   // Texto con el subtotal
+  const envioElemento        = seleccionar('#resEnvio');      // Texto con el envío
+  const totalElemento        = seleccionar('#resTotal');      // Texto con el total
+  const selectorMetodoEnvio  = seleccionar('#metodoEnvio');   // Selector de tipo de envío
+  const botonVaciar          = seleccionar('#btnVaciar');     // Botón "vaciar carrito"
+  const botonPagar           = seleccionar('#btnPagar');      // Botón "pagar"
+
+  // Estado en LocalStorage
+  // Leer carrito guardado o devolver vacío si no existe
+  function obtenerCarrito() {
+    try { return JSON.parse(localStorage.getItem(claveCarrito) || '[]'); }
+    catch { return []; }
   }
-  function setCart(arr) {
-    // Persiste el carrito como JSON
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); // Si no lo hicieras, el carrito se perdería al recargar o quedaría guardado en un formato que no puedes trabajar.
+
+  // Guardar carrito en LocalStorage en formato JSON
+  function guardarCarrito(arr) {
+    localStorage.setItem(claveCarrito, JSON.stringify(arr));
   }
 
-  // Logica de envio
-  function envioPrecio() {
-    const v = metodoEnvio?.value;
+  // Calcular costo de envío
+  function calcularCostoEnvio() {
+    const v = selectorMetodoEnvio?.value;
     if (v === 'normal')  return 3990;
     if (v === 'express') return 6990;
-    return 0; // retiro en tienda
+    return 0; // Retiro en tienda
   }
 
-  // Botonera de cantidad (renderiza los + / -)
-  function cantButtons(id, cant) {
+  // Botones de cantidad (+ / -)
+  function dibujarBotonesCantidad(id, cant) {
     return `
       <div class="btn-group" role="group">
         <button class="btn btn-sm btn-outline-secondary" data-action="dec" data-id="${id}">−</button>
@@ -54,28 +66,29 @@
       </div>`;
   }
 
-// Badge global (suma todas las cantidades del carrito)
-function updateBadge() {
-  const totalItems = getCart().reduce((acc, it) => acc + (it.cant || 0), 0);
-  // Puede haber varios badges en distintas páginas/navbars
-  const BADGES = document.querySelectorAll(".badgeCarrito");  
-  BADGES.forEach(badge => {
-    badge.textContent = totalItems;
-  });
+  // Contador en el ícono del carrito
+  function actualizarContadorCarrito() {
+    // Sumar todas las cantidades del carrito
+    const totalItems = obtenerCarrito().reduce((acc, it) => acc + (it.cant || 0), 0);
+
+    // Puede haber más de un contador
+    document.querySelectorAll('.badgeCarrito').forEach(b => {
+      b.textContent = totalItems;
+    });
   }
 
-  // Render principal del carrito: pinta filas y totales
-  function render() {
-    const items = getCart();
+  // Dibujar carrito en la página
+  function mostrarCarrito() {
+    const items = obtenerCarrito();
     let html = '';
     let subtotal = 0;
 
-    // Recorremos ítems calculando subtotales y armando las filas
+    // Recorremos productos y armamos cada fila de la tabla
     for (const it of items) {
-      const cant = Math.min(Math.max(it.cant || 1, 1), MAX_CANT);
-      const price = it.precio || 0;
-      const st = price * cant;
-      subtotal += st;
+      const cant   = Math.min(Math.max(it.cant || 1, 1), MAXIMO_CANTIDAD); // Validación 1..10
+      const precio = Number(it.precio) || 0;
+      const st     = precio * cant;
+      subtotal    += st;
 
       html += `
         <tr>
@@ -88,9 +101,9 @@ function updateBadge() {
               </div>
             </div>
           </td>
-          <td class="text-center">${cantButtons(it.id, cant)}</td>
-          <td class="text-end">${fmtCLP(price)}</td>
-          <td class="text-end">${fmtCLP(st)}</td>
+          <td class="text-center">${dibujarBotonesCantidad(it.id, cant)}</td>
+          <td class="text-end">${formatearCLP(precio)}</td>
+          <td class="text-end">${formatearCLP(st)}</td>
           <td class="text-center">
             <button class="btn btn-sm btn-outline-danger" data-action="del" data-id="${it.id}">
               <i class="bi bi-trash"></i>
@@ -99,81 +112,84 @@ function updateBadge() {
         </tr>`;
     }
 
-    // Si no hay items, mostramos mensaje de carrito vacío
-    if (tbody) {
-      tbody.innerHTML = html || '<tr><td colspan="5" class="text-center text-muted">Tu carrito está vacío</td></tr>';
+    // Si no hay productos se muestra mensaje de carrito vacio
+    if (cuerpoTablaCarrito) {
+      cuerpoTablaCarrito.innerHTML =
+        html || '<tr><td colspan="5" class="text-center text-muted">Tu carrito está vacío</td></tr>';
     }
 
-    // Totales con o sin envio
-    const envio = envioPrecio();
-    if (resSubtotal) resSubtotal.textContent = fmtCLP(subtotal);
-    if (resEnvio)    resEnvio.textContent    = fmtCLP(envio);
-    if (resTotal)    resTotal.textContent    = fmtCLP(subtotal + envio);
+    // Mostrar subtotales, envío y total
+    const envio = calcularCostoEnvio();
+    if (subtotalElemento) subtotalElemento.textContent = formatearCLP(subtotal);
+    if (envioElemento)    envioElemento.textContent    = formatearCLP(envio);
+    if (totalElemento)    totalElemento.textContent    = formatearCLP(subtotal + envio);
 
-    updateBadge();
+    actualizarContadorCarrito();
   }
 
-  // Eventos dentro de la tabla del carrito (+ / − / eliminar)
+  // Eventos dentro del carrito: + / − / eliminar producto
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-action]');
-    if (!btn) return; // Si el click no fue a un botón de acción, salimos
+    if (!btn) return;
 
-    const id = btn.getAttribute('data-id');
+    const id     = btn.getAttribute('data-id');
     const action = btn.getAttribute('data-action');
-    const cart = getCart();
-    const idx = cart.findIndex(x => String(x.id) === String(id));
-    if (idx === -1) return; // No encontrado (nada que hacer)
+    const cart   = obtenerCarrito();
+    const idx    = cart.findIndex(x => String(x.id) === String(id));
+    if (idx === -1) return;
 
-    if (action === 'inc') cart[idx].cant = Math.min(MAX_CANT, (cart[idx].cant || 1) + 1); // Validación de cantidad maxima 10
-    if (action === 'dec') cart[idx].qtcant = Math.max(1, (cart[idx].cant || 1) - 1); // Validación de cantidad minima 1
-    if (action === 'del') cart.splice(idx, 1); // Si por alguna razón el carrito trae un número inválido (ej: 0 o 50), lo corrige automáticamente al mostrarlo, siempre queda entre 1 y 10.
+    if (action === 'inc') cart[idx].cant = Math.min(MAXIMO_CANTIDAD, (cart[idx].cant || 1) + 1);
+    if (action === 'dec') cart[idx].cant = Math.max(1, (cart[idx].cant || 1) - 1);
+    if (action === 'del') cart.splice(idx, 1);
 
-    setCart(cart);
-    render(); // Repintamos la UI y totales
-
-  // Cambio de método de envío / recalcula los totales
-  metodoEnvio && metodoEnvio.addEventListener('change', render);
-
-  // BOTON Vaciar carrito con confirmación
-  BTN_CLEAR && BTN_CLEAR.addEventListener('click', () => {
-    if (!confirm('¿Vaciar carrito?')) return; // Validación y confirmación de vaciar carrito 
-    setCart([]);
-    render();
+    guardarCarrito(cart);
+    mostrarCarrito();
   });
 
-  // BOTON pagar
-  BTN_PAGAR && BTN_PAGAR.addEventListener('click', () => {
+  // Cambiar tipo de envío
+  selectorMetodoEnvio && selectorMetodoEnvio.addEventListener('change', mostrarCarrito);
+
+  // Vaciar carrito con confirmación
+  botonVaciar && botonVaciar.addEventListener('click', () => {
+    if (!confirm('¿Vaciar carrito?')) return;
+    guardarCarrito([]);
+    mostrarCarrito();
+  });
+
+  // Pagar
+  botonPagar && botonPagar.addEventListener('click', () => {
     alert('Flujo de pago');
   });
 
-  // Botones "Agregar al carrito" en otras páginas
+  // Agregar al carrito desde botones en otras páginas
   document.addEventListener('click', (e) => {
     const add = e.target.closest('[data-add-to-cart]');
     if (!add) return;
 
-    // Tomamos los datos desde data-attributes del botón
     const item = {
-      id: add.dataset.id,
+      id:     add.dataset.id,
       nombre: add.dataset.nombre,
-      precio: add.dataset.precio || 0,
+      precio: Number(add.dataset.precio || 0),
       imagen: add.dataset.imagen || '',
-      cant: Number(add.dataset.cant || 1)
+      cant:   Number(add.dataset.cant   || 1),
     };
 
-    const cart = getCart();
-    const idx = cart.findIndex(x => String(x.id) === String(item.id));
+    const cart = obtenerCarrito();
+    const idx  = cart.findIndex(x => String(x.id) === String(item.id));
+
     if (idx >= 0) {
-      // Si ya existe sumamos respetando el tope
-      cart[idx].cant = Math.min(MAX_CANT, (cart[idx].cant || 1) + (item.cant || 1));
+      // Si ya existe el item, se aumenta cantidad hasta el máximo
+      cart[idx].cant = Math.min(MAXIMO_CANTIDAD, (cart[idx].cant || 1) + (item.cant || 1));
     } else {
-      // Si es nuevo normalizamos la cantidad 1/10
-      item.cant = Math.min(MAX_CANT, Math.max(1, item.cant || 1));
+      // Si el item es nuevo, se asegura que quede entre 1 y 10
+      item.cant = Math.min(MAXIMO_CANTIDAD, Math.max(1, item.cant || 1));
       cart.push(item);
     }
-    setCart(cart);
-    render();
+
+    guardarCarrito(cart);
+    mostrarCarrito();
   });
 
-  // Renderizado inicial al cargar la pagina
-  render();
+  // Mostrar carrito al cargar la página
+  mostrarCarrito();
 })();
